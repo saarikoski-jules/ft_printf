@@ -9,7 +9,7 @@ int main()
 	i = 332;
 	d = 20;
 	// printf("d = %d\ni = %i\no = %o\nu = %u\nx = %x\nX = %X\nc = %c\n", d, d, d, d, d, d, *str);
-	printf("%o\n", -12);
+	printf("%    d\n", 12);
 	return (0);
 }
 

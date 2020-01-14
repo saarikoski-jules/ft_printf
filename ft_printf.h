@@ -1,33 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_numlen_base.c                                   :+:    :+:            */
+/*   ft_printf.h                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/12/05 18:00:21 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/01/13 16:36:02 by jsaariko      ########   odam.nl         */
+/*   Created: 2020/01/14 13:02:19 by jsaariko       #+#    #+#                */
+/*   Updated: 2020/01/14 19:01:37 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
-#include <stdio.h>//REMOVE
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
-int	ft_numlen_base(int n, int base)
+typedef struct  s_printf_arg
 {
-	int l;
-	long num;
+    void                *arg;
+    struct s_printf_arg *next;
+}               t_printf_arg;
 
-	num = (long)n;
-	l = 0;
-	if (num == 0)
-		return (1);
-	if (num < 0)
-		l++;
-	while (num != 0)
-	{
-		num /= base;
-		l++;
-	}
-	return (l);
-}
+#endif
+
+//tomorrow's union enum day
