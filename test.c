@@ -26,3 +26,13 @@ int main()
 //x = unsigned hexadecimal uppercase
 
 //c = the first byte of the argument is printed. If i give it a pointer, (*str) it will print the first. It wont work with a string otherwise
+
+// c check
+// s check
+// p
+// d check
+// i check
+// u
+// x
+// X
+// %
