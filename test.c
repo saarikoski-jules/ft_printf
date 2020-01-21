@@ -89,7 +89,7 @@ int main()
 // p check
 // d check
 // i check
-// u
-// x
+// u 
+// x 
 // X check
 // %

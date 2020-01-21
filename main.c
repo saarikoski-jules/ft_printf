@@ -36,29 +36,36 @@ void			print_lst(t_printf_arg **head)
 		}
 		else if (tmp->kind == X)
 		{
-			printf("X: %p, %s\n", tmp, tmp->arg.X);
+			printf("X: %p, %lX\n", tmp, tmp->arg.X);
+		}
+		else if (tmp->kind == x)
+		{
+			printf("x: %p, %lx\n", tmp, tmp->arg.x);
 		}
 		else if (tmp->kind == p)
 		{
-			long c = tmp->arg.p;
-			char hex[12];
-			i = 11;
-			while(i >= 0)
-			{
-				hex[i] = c % 16;
-				if (hex[i] >= 10 && hex[i] <= 16)
-				{
-					hex[i] += 'a' - 10;
-				}
-				else if (hex[i] >= 0 && hex[i] <= 9)
-					hex[i] += '0';
-				c /= 16;
-				i--;
-			}
-			hex[12] = '\0';
-			write(1, "p: 0x", 5);
-			write(1, hex, 12);
-			write(1, "\n", 1);
+			printf("p: %p, %p\n", tmp, tmp->arg.p);
+
+			// PRINT POINTER
+			// long c = tmp->arg.p;
+			// char hex[13];
+			// i = 11;
+			// while(i >= 0)
+			// {
+			// 	hex[i] = c % 16;
+			// 	if (hex[i] >= 10 && hex[i] <= 16)
+			// 	{
+			// 		hex[i] += 'a' - 10;
+			// 	}
+			// 	else if (hex[i] >= 0 && hex[i] <= 9)
+			// 		hex[i] += '0';
+			// 	c /= 16;
+			// 	i--;
+			// }
+			// hex[12] = '\0';
+			// write(1, "p: 0x", 5);
+			// write(1, hex, 12);
+			// write(1, "\n", 1);
 		}
 		tmp = tmp->next;
 	}
@@ -71,6 +78,8 @@ t_printf_arg	*gen_elem(t_printf_arg **head)
 	t_printf_arg	*new;
 
 	new = malloc(sizeof(t_printf_arg));
+	if (!new)
+		return (NULL);
 	printf("New item: %p\n", new);
 	new->next = NULL;
 	// new->arg.c = '0';
@@ -116,40 +125,49 @@ void	gen_arg_list(t_printf_arg **head, const char *str, va_list ap)
 		// printf("'%c'\n", str[i]);
 		if (str[i] == '%')
 		{
+			cur = gen_elem(head);
 			if (str[i + 1] == 'c')
 			{
-				cur = gen_elem(head);
+				// cur = gen_elem(head);
 				cur->arg.c = va_arg(ap, int);
 				cur->kind = c;
 			}
 			else if (str[i + 1] == 'd')
 			{
-				cur = gen_elem(head);
+				// cur = gen_elem(head);
 				// printf("%p\n", cur);
 				cur->arg.d = va_arg(ap, int);
 				cur->kind = d;
 			}
 			else if (str[i + 1] == 'i')
 			{
-				cur = gen_elem(head);
+				// cur = gen_elem(head);
 				cur->arg.i = va_arg(ap, int);
 				cur->kind = i;
 			}
 			else if (str[i + 1] == 's')
 			{
-				cur = gen_elem(head);
+				// cur = gen_elem(head);
 				cur->arg.s = ft_strdup(va_arg(ap, char *));
 				cur->kind = s;
 			}
 			else if (str[i + 1] == 'X')
 			{
-				cur = gen_elem(head);
-				cur->arg.X = ft_itoa_base(va_arg(ap, int), 16);
+				// cur = gen_elem(head);
+				// cur->arg.X = ft_itoa_base(va_arg(ap, int), 16);
+				cur->arg.X = va_arg(ap, int);
 				cur->kind = X;
+			}
+			else if (str[i + 1] == 'x')
+			{
+				// cur = gen_elem(head);
+				// cur->arg.X = ft_itoa_base(va_arg(ap, int), 16);
+				cur->arg.x = va_arg(ap, int);
+				cur->kind = x;
 			}
 			else if (str[i + 1] == 'p')
 			{
-				cur = gen_elem(head);
+				// cur = gen_elem(head);
 				cur->arg.p = va_arg(ap, void *);
 				cur->kind = p;
 			}
@@ -212,7 +230,7 @@ int main()
 {
 	char c;
 
-	ft_printf("str %c, %s, %c, %c, %d, %d, %X, %p", 'c', "I'm a string", '9', '2', 7, 12, 12, &c);
+	ft_printf("str %c, %s, %c, %c, %d, %d, %X, %p, %x", 'c', "I'm a string", '9', '2', 7, 12, 12, &c, 12);
 	// printf("why");
 	return (0);
 }

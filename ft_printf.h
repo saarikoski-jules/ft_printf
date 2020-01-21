@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/14 13:02:19 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/01/20 21:27:19 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/01/21 19:50:59 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ typedef union	u_type
 	int		i;
 	char	c;
 	char	*s;
-	char	*x;
-	char	*X;
+	long	x;
+	long	X;
 	void	*p;
 }				t_type;
 
