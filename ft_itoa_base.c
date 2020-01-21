@@ -6,17 +6,17 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 12:38:44 by jsaariko       #+#    #+#                */
-/*   Updated: 2019/12/05 22:52:14 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/01/21 00:54:22 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include <stdio.h>//REMOVE
 
-int ft_printf(const char *str, ...);
-int ft_numlen_base(int n, int base);
+int ft_printf(const char *str, ...);//
+int ft_numlen_base(int n, int base);//
 
-char *str_fill(char *str, long num, int base, int len)
+static char *str_fill(char *str, long num, int base, int len)
 {
 	while (num != 0)
 	{
@@ -30,7 +30,7 @@ char *str_fill(char *str, long num, int base, int len)
 	return (str);
 }
 
-char *ft_itoa_base(int n, int base)
+char *ft_itoa_base(long n, int base)
 {
 	int len;
 	long num;

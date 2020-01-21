@@ -1,4 +1,5 @@
 //Honest to god I dont even know where to start
+//Next up some structuring
 
 #include "ft_printf.h"
 #include <stdarg.h>
@@ -6,28 +7,60 @@
 #include <unistd.h>
 #include "libft/libft.h"
 
-void			print_lst(t_printf_arg **head, const char *str)
+void			print_lst(t_printf_arg **head)
 {
 	t_printf_arg *tmp;
 	int i;
 
 	tmp = *head;
 	i = 0;
-	printf("---------------PRINT_LST BEGIN---------------\n");
-	while (str[i] != '\0')
+	int count = 0;
+	printf("\n---------------PRINT_LST BEGIN---------------\n");
+	while (tmp != NULL)
 	{
-		if (str[i] == '%')
+		if (tmp->kind == c)
 		{
-			if (str[i + 1] == 'c')
-				printf("%p, %c\n", tmp, tmp->arg.c);
-			else if (str[i + 1] == 'd' || str[i + 1] == 'i')
-				printf("%p, %d\n", tmp, tmp->arg.d);
-			else if (str[i + 1] == 's')
-				printf("%p, %s\n", tmp, tmp->arg.s);
-			tmp = tmp->next;
-			i++;
+			printf("c: %p, %c\n", tmp, tmp->arg.c);
 		}
-		i++;
+		else if (tmp->kind == d)
+		{
+			printf("d: %p, %d\n", tmp, tmp->arg.d);
+		}
+		else if (tmp->kind == i)
+		{
+			printf("i: %p, %i\n", tmp, tmp->arg.i);
+		}
+		else if (tmp->kind == s)
+		{
+			printf("s: %p, %s\n", tmp, tmp->arg.s);
+		}
+		else if (tmp->kind == X)
+		{
+			printf("X: %p, %s\n", tmp, tmp->arg.X);
+		}
+		else if (tmp->kind == p)
+		{
+			long c = tmp->arg.p;
+			char hex[12];
+			i = 11;
+			while(i >= 0)
+			{
+				hex[i] = c % 16;
+				if (hex[i] >= 10 && hex[i] <= 16)
+				{
+					hex[i] += 'a' - 10;
+				}
+				else if (hex[i] >= 0 && hex[i] <= 9)
+					hex[i] += '0';
+				c /= 16;
+				i--;
+			}
+			hex[12] = '\0';
+			write(1, "p: 0x", 5);
+			write(1, hex, 12);
+			write(1, "\n", 1);
+		}
+		tmp = tmp->next;
 	}
 	printf("----------------PRINT_LST END----------------\n\n");
 }
@@ -38,6 +71,7 @@ t_printf_arg	*gen_elem(t_printf_arg **head)
 	t_printf_arg	*new;
 
 	new = malloc(sizeof(t_printf_arg));
+	printf("New item: %p\n", new);
 	new->next = NULL;
 	// new->arg.c = '0';
 	if (*head == NULL)
@@ -86,30 +120,42 @@ void	gen_arg_list(t_printf_arg **head, const char *str, va_list ap)
 			{
 				cur = gen_elem(head);
 				cur->arg.c = va_arg(ap, int);
-				i++;
+				cur->kind = c;
 			}
 			else if (str[i + 1] == 'd')
 			{
 				cur = gen_elem(head);
 				// printf("%p\n", cur);
 				cur->arg.d = va_arg(ap, int);
-				i++;
+				cur->kind = d;
 			}
 			else if (str[i + 1] == 'i')
 			{
 				cur = gen_elem(head);
 				cur->arg.i = va_arg(ap, int);
-				i++;
+				cur->kind = i;
 			}
 			else if (str[i + 1] == 's')
 			{
 				cur = gen_elem(head);
 				cur->arg.s = ft_strdup(va_arg(ap, char *));
-				i++;
+				cur->kind = s;
+			}
+			else if (str[i + 1] == 'X')
+			{
+				cur = gen_elem(head);
+				cur->arg.X = ft_itoa_base(va_arg(ap, int), 16);
+				cur->kind = X;
+			}
+			else if (str[i + 1] == 'p')
+			{
+				cur = gen_elem(head);
+				cur->arg.p = va_arg(ap, void *);
+				cur->kind = p;
 			}
 			// cur = gen_elem(head);
 			// cur->arg = va_arg(ap, void*);
-			// i++;
+			i++;
 		}
 		i++;
 	}
@@ -144,7 +190,8 @@ int ft_printf(const char *str, ...)
 
 	gen_arg_list(&head, str, ap);
 	// printf("done gen lst\n");
-	print_lst(&head, str);
+	print_lst(&head);
+	// printf("why");
 	// printf("end: %c\n", head->arg.c);
 	// printf("end: %c\n", head->next->arg.c);
 	// printf("end: %c\n", head->next->next->arg.d);
@@ -163,6 +210,9 @@ int ft_printf(const char *str, ...)
 
 int main()
 {
-	ft_printf("str %c, %s, %c, %c, %d", 'c', "I'm a string", '9', '2', 7);
+	char c;
+
+	ft_printf("str %c, %s, %c, %c, %d, %d, %X, %p", 'c', "I'm a string", '9', '2', 7, 12, 12, &c);
+	// printf("why");
 	return (0);
 }
