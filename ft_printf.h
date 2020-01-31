@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/14 13:02:19 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/01/21 19:50:59 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/01/31 03:04:30 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,30 +15,36 @@
 
 typedef union	u_type
 {
-	int		d;
-	int		i;
-	char	c;
-	char	*s;
-	long	x;
-	long	X;
-	void	*p;
+	int				d;
+	int				i;
+	unsigned int	u;
+	char			c;
+	char			*s;
+	unsigned int	x;
+	unsigned int	X;
+	void			*p;
 }				t_type;
 
-typedef enum	e_kind
+//unsigned ints for hex for sure
+
+typedef enum	e_conversion
 {
 	d,
 	i,
+	u,
 	c,
 	s,
 	x,
 	X,
 	p
-}				t_kind;
+}				t_conversion;
 
 typedef struct	s_printf_arg
 {
-	t_kind					kind;
+	t_conversion			conv;
 	t_type					arg;
+	// unsigned int			width; //should i use size_t?
+	char					*format_str;
 	struct s_printf_arg		*next;
 }				t_printf_arg;
 

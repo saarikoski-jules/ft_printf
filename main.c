@@ -18,31 +18,35 @@ void			print_lst(t_printf_arg **head)
 	printf("\n---------------PRINT_LST BEGIN---------------\n");
 	while (tmp != NULL)
 	{
-		if (tmp->kind == c)
+		if (tmp->conv == c)
 		{
 			printf("c: %p, %c\n", tmp, tmp->arg.c);
 		}
-		else if (tmp->kind == d)
+		else if (tmp->conv == d)
 		{
 			printf("d: %p, %d\n", tmp, tmp->arg.d);
 		}
-		else if (tmp->kind == i)
+		else if (tmp->conv == i)
 		{
 			printf("i: %p, %i\n", tmp, tmp->arg.i);
 		}
-		else if (tmp->kind == s)
+		else if (tmp->conv == u)
+		{
+			printf("u: %p, %u\n", tmp, tmp->arg.i);
+		}
+		else if (tmp->conv == s)
 		{
 			printf("s: %p, %s\n", tmp, tmp->arg.s);
 		}
-		else if (tmp->kind == X)
+		else if (tmp->conv == X)
 		{
-			printf("X: %p, %lX\n", tmp, tmp->arg.X);
+			printf("X: %p, %X\n", tmp, tmp->arg.X);
 		}
-		else if (tmp->kind == x)
+		else if (tmp->conv == x)
 		{
-			printf("x: %p, %lx\n", tmp, tmp->arg.x);
+			printf("x: %p, %x\n", tmp, tmp->arg.x);
 		}
-		else if (tmp->kind == p)
+		else if (tmp->conv == p)
 		{
 			printf("p: %p, %p\n", tmp, tmp->arg.p);
 
@@ -67,6 +71,7 @@ void			print_lst(t_printf_arg **head)
 			// write(1, hex, 12);
 			// write(1, "\n", 1);
 		}
+		// else if (tmp-)
 		tmp = tmp->next;
 	}
 	printf("----------------PRINT_LST END----------------\n\n");
@@ -102,7 +107,7 @@ t_printf_arg	*gen_elem(t_printf_arg **head)
 
 	// printf("new: %p, %d\n", new, new->arg.c);
 	// if (cur != NULL)
-	// 	printf("cur: %p	 %d\n", cur, cur->arg.c);
+	// 	printf("cur: %p	 %d\ßn", cur, cur->arg.c);
 	// else
 	// 	printf("cur: NULL\n");
 	// if (*head != NULL)
@@ -117,6 +122,7 @@ void	gen_arg_list(t_printf_arg **head, const char *str, va_list ap)
 	int				i;
 	t_printf_arg	*cur;
 	char			item;
+	char			*convs = "cspdiuxX%";
 
 	i = 0;
 	while(str[i] != '\0')
@@ -126,50 +132,63 @@ void	gen_arg_list(t_printf_arg **head, const char *str, va_list ap)
 		if (str[i] == '%')
 		{
 			cur = gen_elem(head);
+			cur->format_str = ft_strdupchr(str + i + 1, convs);
+			printf("%s\n", cur->format_str);
+			//Edit to find next conversion instead of checking next char
 			if (str[i + 1] == 'c')
 			{
 				// cur = gen_elem(head);
-				cur->arg.c = va_arg(ap, int);
-				cur->kind = c;
+				cur->arg.c = va_arg(ap, unsigned int);
+				cur->conv = c;
 			}
 			else if (str[i + 1] == 'd')
 			{
 				// cur = gen_elem(head);
 				// printf("%p\n", cur);
 				cur->arg.d = va_arg(ap, int);
-				cur->kind = d;
+				cur->conv = d;
 			}
 			else if (str[i + 1] == 'i')
 			{
 				// cur = gen_elem(head);
 				cur->arg.i = va_arg(ap, int);
-				cur->kind = i;
+				cur->conv = i;
 			}
 			else if (str[i + 1] == 's')
 			{
 				// cur = gen_elem(head);
 				cur->arg.s = ft_strdup(va_arg(ap, char *));
-				cur->kind = s;
+				cur->conv = s;
 			}
 			else if (str[i + 1] == 'X')
 			{
 				// cur = gen_elem(head);
 				// cur->arg.X = ft_itoa_base(va_arg(ap, int), 16);
-				cur->arg.X = va_arg(ap, int);
-				cur->kind = X;
+				cur->arg.X = va_arg(ap, unsigned int);
+				cur->conv = X;
 			}
 			else if (str[i + 1] == 'x')
 			{
 				// cur = gen_elem(head);
 				// cur->arg.X = ft_itoa_base(va_arg(ap, int), 16);
-				cur->arg.x = va_arg(ap, int);
-				cur->kind = x;
+				cur->arg.x = va_arg(ap, unsigned int);
+				cur->conv = x;
 			}
 			else if (str[i + 1] == 'p')
 			{
 				// cur = gen_elem(head);
 				cur->arg.p = va_arg(ap, void *);
-				cur->kind = p;
+				cur->conv = p;
+			}
+			else if (str[i + 1] == 'u')
+			{
+				cur->arg.u = va_arg(ap, unsigned int);
+				cur->conv = u;
+			}
+			else if (str[i + 1] == '%')
+			{
+				cur->arg.c = '%';
+				cur->conv = c;
 			}
 			// cur = gen_elem(head);
 			// cur->arg = va_arg(ap, void*);
@@ -229,8 +248,9 @@ int ft_printf(const char *str, ...)
 int main()
 {
 	char c;
+	int i = -12;
 
-	ft_printf("str %c, %s, %c, %c, %d, %d, %X, %p, %x", 'c', "I'm a string", '9', '2', 7, 12, 12, &c, 12);
+	ft_printf("str %aaaaac, %s, %c, %c, %d, %d, %X, %p, %x %u %%", 'c', "I'm a string", '9', '2', 7, 12, 12, &c, 12, i);
 	// printf("why");
 	return (0);
 }
