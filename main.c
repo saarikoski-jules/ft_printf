@@ -1,5 +1,3 @@
-//Honest to god I dont even know where to start
-//Next up some structuring
 
 #include "ft_printf.h"
 #include <stdarg.h>
@@ -20,35 +18,35 @@ void			print_lst(t_printf_arg **head)
 	{
 		if (tmp->conv == c)
 		{
-			printf("c: %p, %c\n", tmp, tmp->arg.c);
+			printf("c: %p\n%c\nflag string: %s\n\n", tmp, tmp->arg.c, tmp->format_str);
 		}
 		else if (tmp->conv == d)
 		{
-			printf("d: %p, %d\n", tmp, tmp->arg.d);
+			printf("d: %p\n%d\nflag string: %s\n\n", tmp, tmp->arg.d, tmp->format_str);
 		}
 		else if (tmp->conv == i)
 		{
-			printf("i: %p, %i\n", tmp, tmp->arg.i);
+			printf("i: %p\n%i\nflag string: %s\n\n", tmp, tmp->arg.i, tmp->format_str);
 		}
 		else if (tmp->conv == u)
 		{
-			printf("u: %p, %u\n", tmp, tmp->arg.i);
+			printf("u: %p\n%u\nflag string: %s\n\n", tmp, tmp->arg.i, tmp->format_str);
 		}
 		else if (tmp->conv == s)
 		{
-			printf("s: %p, %s\n", tmp, tmp->arg.s);
+			printf("s: %p\n%s\nflag string: %s\n\n", tmp, tmp->arg.s, tmp->format_str);
 		}
 		else if (tmp->conv == X)
 		{
-			printf("X: %p, %X\n", tmp, tmp->arg.X);
+			printf("X: %p\n%X\nflag string: %s\n\n", tmp, tmp->arg.X, tmp->format_str);
 		}
 		else if (tmp->conv == x)
 		{
-			printf("x: %p, %x\n", tmp, tmp->arg.x);
+			printf("x: %p\n%x\nflag string: %s\n\n", tmp, tmp->arg.x, tmp->format_str);
 		}
 		else if (tmp->conv == p)
 		{
-			printf("p: %p, %p\n", tmp, tmp->arg.p);
+			printf("p: %p\n%p\nflag string: %s\n\n", tmp, tmp->arg.p, tmp->format_str);
 
 			// PRINT POINTER
 			// long c = tmp->arg.p;
@@ -107,7 +105,7 @@ t_printf_arg	*gen_elem(t_printf_arg **head)
 
 	// printf("new: %p, %d\n", new, new->arg.c);
 	// if (cur != NULL)
-	// 	printf("cur: %p	 %d\ßn", cur, cur->arg.c);
+	// 	printf("cur: %p	 %d\n", cur, cur->arg.c);
 	// else
 	// 	printf("cur: NULL\n");
 	// if (*head != NULL)
@@ -133,8 +131,7 @@ void	gen_arg_list(t_printf_arg **head, const char *str, va_list ap)
 		{
 			cur = gen_elem(head);
 			cur->format_str = ft_strdupchr(str + i + 1, convs);
-			printf("%s\n", cur->format_str);
-			//Edit to find next conversion instead of checking next char
+			i += ft_strchrset(str + i + 1, convs);
 			if (str[i + 1] == 'c')
 			{
 				// cur = gen_elem(head);
@@ -250,7 +247,7 @@ int main()
 	char c;
 	int i = -12;
 
-	ft_printf("str %aaaaac, %s, %c, %c, %d, %d, %X, %p, %x %u %%", 'c', "I'm a string", '9', '2', 7, 12, 12, &c, 12, i);
+	ft_printf("str %aaaaac, %000-s, %c, %c, %d, %d, %X, %p, %x %u %%", 'c', "I'm a string", '9', '2', 7, 12, 12, &c, 12, i);
 	// printf("why");
 	return (0);
 }

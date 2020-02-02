@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/14 13:02:19 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/01/31 03:04:30 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/02/01 17:37:20 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef enum	e_conversion
 	s,
 	x,
 	X,
-	p
+	p,
 }				t_conversion;
 
 typedef struct	s_printf_arg
