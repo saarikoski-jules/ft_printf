@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/14 13:02:19 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/02/01 17:37:20 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/02/02 21:39:50 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ typedef struct	s_printf_arg
 }				t_printf_arg;
 
 char	*ft_itoa_base(int n, int base);
+// void	parse_current(t_transition_code state(char), char token, t_printf_arg **arg);
+void	manage_parser(t_printf_arg **arg, char *tokens);
 
 #endif
 
