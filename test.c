@@ -67,7 +67,7 @@ int main()
 
 	// printf("u as d %d\nu as u %u\nd as d %d\nd as u %u\n", u, u, d, d);
 
-	printf("%*%\n", 4);
+	printf("'%-1230d'\n", 12);
 	// unsigned int is the same as int but cannot be neg
 
 	return (0);

@@ -1,0 +1,98 @@
+// Next step: write a fucking parser
+// States are function pointers that store information into a struct
+// You read a token and enter that into a fsm
+// State function will return a return code according to which you will transition to next state
+
+// each state function has a corresponding state code (do i have to do this?)
+
+// Can i recycle each token, aka if the same token exists multiple times in a row, handle it automatically without having to add it to the transition matrix
+
+// Error state tokens are ignored
+
+
+
+// typedef	enum	e_transition_code
+// {
+// 	dash,
+// 	zero,
+// 	num,
+// 	error,
+// 	exit,
+// }				t_transition_code;
+
+// typedef enum	e_state_code
+// {
+// 	entry_state,
+// 	dash_state,
+// 	zero_state,
+// 	num_state,
+// 	error_state,
+// 	exit_state,
+// }				t_state_code;
+
+// typedef struct s_transition_obj
+// {
+// 	t_state_code		orig_state;
+// 	t_transition_code	transition;
+// 	t_state_code		next_state;
+// }				t_transition_obj;
+
+// make sure if you've ever been to a dash_state, you'll never be able to enter a zero_state
+
+// t_transition_obj transition_table[]
+// {
+// 	{entry_state, dash, dash_state},
+// 	{entry_state, zero, zero_state},
+// 	{entry_state, num, num_state},
+// 	{entry_state, error, error_state},
+// 	{entry_state, exit, exit_state},
+
+// 	{dash_state, dash, dash_state},
+// 	{dash_state, zero, dash_state},
+// 	{dash_state, num, num_dash_state},
+// 	{dash_state, error, error_dash_state},
+// 	{dash_state, exit, exit_state},
+
+// {num_dash_state, dash, dash_state},
+// {num_dash_state, zero, num_dash_state},
+// {num_dash_state, num, num_dash_state},
+// {num_dash_state, error, error_dash_state},
+// {num_dash_state, exit, exit_state},
+
+// {error_dash_state, dash, dash_state},
+// {error_dash_state, zero, dash_state},
+// {error_dash_state, num, num_dash_state}, //overwrite
+// {error_dash_state, error, error_dash_state},
+// {error_dash_state, exit, exit_state},
+
+// 	{zero_state, dash, dash_state},
+// 	{zero_state, zero, zero_state},
+// 	{zero_state, num, num_state},
+// 	{zero_state, error, error_state},
+// 	{zero_state, exit, exit_state},
+
+// 	{num_state, dash, num_state}, //undefined behavior in real printf
+// 	{num_state, zero, num_state},
+// 	{num_state, num, num_state},
+// 	{num_state, error, error_state},
+// 	{num_state, exit, exit_state},
+
+// 	{error_state, dash, dash_state},
+// 	{error_state, zero, zero_state},
+// 	{error_state, num, num_state}, //previous num overwritten
+// 	{error_state, error, error_state},
+// 	{error_state, exit, exit_state},
+// }
+
+void parser(char token)
+{
+
+}
+
+void manage_parser(char *tokens)
+{
+	char current_token;
+	int i;
+
+	parser(current_token);
+}
