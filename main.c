@@ -130,7 +130,9 @@ void	gen_arg_list(t_printf_arg **head, const char *str, va_list ap)
 		if (str[i] == '%')
 		{
 			cur = gen_elem(head);
-			cur->format_str = ft_strdupchr(str + i + 1, convs);
+			cur->format_str = ft_strdupchr(str + i + 1, convs); //Instead of this, directly parse the information into a usable format in the struct.
+			// AKA pass the string and current arg to the parser.
+			manage_parser(&cur, cur->format_str);
 			i += ft_strchrset(str + i + 1, convs);
 			if (str[i + 1] == 'c')
 			{
@@ -224,7 +226,6 @@ int ft_printf(const char *str, ...)
 
 	gen_arg_list(&head, str, ap);
 	// printf("done gen lst\n");
-	print_lst(&head);
 	// printf("why");
 	// printf("end: %c\n", head->arg.c);
 	// printf("end: %c\n", head->next->arg.c);
@@ -239,6 +240,7 @@ int ft_printf(const char *str, ...)
 	// printf("%s\n", va_arg(ap, char*));
 
 	va_end(ap);
+	print_lst(&head);
 	return (0);
 }
 
