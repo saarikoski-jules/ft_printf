@@ -11,6 +11,39 @@
 // Error state tokens are ignored
 
 // t_transition_code 
+typedef	enum	e_transition_code
+{
+	dash,
+	zero,
+	num,
+	error,
+	exit,
+}				t_transition_code;
+
+t_transition_code entry_state(char token);
+t_transition_code dash_state(char token);
+t_transition_code zero_state(char token);
+t_transition_code num_state(char token);
+t_transition_code num_dash_state(char token);
+t_transition_code error_state(char token);
+t_transition_code error_dash_state(char token);
+t_transition_code exit_state(char token);
+
+//I can do this
+
+t_transition_code (*function_ptrs[])(char) =
+{
+	entry_state,
+	dash_state,
+	zero_state,
+	num_state,
+	num_dash_state,
+	error_state,
+	error_dash_state,
+	exit_state,
+};
+
+// Will I have to access function poiners by using indexing? Should I use a state code enum for this instead?
 
 // typedef enum	e_state_code
 // {
@@ -23,38 +56,22 @@
 // 	error_state,
 // 	exit_state,
 // }				t_state_code;
-typedef	enum	e_transition_code
-{
-	dash,
-	zero,
-	num,
-	error,
-	exit,
-}				t_transition_code;
 
-typedef t_transition_code (*state_func)(char); // pointer in (*state_func)
+// Or this?
 
-t_transition_code entry_state(char token);
-t_transition_code dash_state(char token);
-t_transition_code zero_state(char token);
-t_transition_code num_state(char token);
-t_transition_code num_dash_state(char token);
-t_transition_code error_state(char token);
-t_transition_code error_dash_state(char token);
-t_transition_code exit_state(char token);
+// typedef t_transition_code (*state_funcs)(char); // pointer in (*state_func)
 
-
-static state_func function_ptrs[] = // or before *function_ptrs
-{
-	entry_state,
-	dash_state,
-	zero_state,
-	num_state,
-	num_dash_state,
-	error_state,
-	error_dash_state,
-	exit_state,
-};
+// static state_funcs function_ptrs[] = // or before *function_ptrs
+// {
+// 	entry_state,
+// 	dash_state,
+// 	zero_state,
+// 	num_state,
+// 	num_dash_state,
+// 	error_state,
+// 	error_dash_state,
+// 	exit_state,
+// };
 
 typedef struct s_transition_obj
 {
