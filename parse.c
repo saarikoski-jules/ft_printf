@@ -29,12 +29,13 @@ void manage_parser(t_printf_arg **arg, char *tokens)
 	t_transition_code (*state)(char, t_printf_arg **);
 	t_transition_code transition;
 	state = &entry_state;
-	transition = parse_current(state, tokens[i], arg);
-	printf("%d\n", transition);
+	transition = parse_current(state, tokens[0], arg);
+
+	// printf("%d\n", transition);
 	i = 0;
 	while (tokens[i] != '\0')
 	{
-		printf("%c\n", tokens[i]);
+		// printf("%c\n", tokens[i]);
 		j = 0;
 		// find the item in transition table that has the current state and the current transition
 		// iterate over the transition table and check for orig state and transition values
@@ -50,7 +51,9 @@ void manage_parser(t_printf_arg **arg, char *tokens)
 			}
 			j++;
 		}
+		printf("%c\n", tokens[i]);
 		transition = parse_current(state, tokens[i], arg);
+		// printf("transition: %u\n", transition);
 		i++;
 	}
 
@@ -64,6 +67,9 @@ void manage_parser(t_printf_arg **arg, char *tokens)
 
 t_transition_code get_transition_code(char token)
 {
+	//Move this function up to call functions from and pass transition code to current state.
+	//Or get next state from this function and call states independently <-- yess
+	// printf("token: %c\n", token);
 	if (token == '-')
 		return (t_dash);
 	else if (token == '0')
@@ -75,3 +81,6 @@ t_transition_code get_transition_code(char token)
 	else
 		return (t_error);
 }
+
+// determines next state basced on the previous token.
+// I should make a get next state function that will get states and assign data in the correct time

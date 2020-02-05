@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/14 13:02:19 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/02/05 16:40:35 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/02/05 17:55:36 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct	s_printf_arg
 	t_conversion			conv;
 	t_type					arg;
 	t_padding				pad_type;
-	size_t					field_width;
+	unsigned int			field_width;
 	// unsigned int			width; //should i use size_t?
 	char					*format_str;
 	struct s_printf_arg		*next;

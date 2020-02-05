@@ -18,7 +18,7 @@ void			print_lst(t_printf_arg **head)
 	{
 		if (tmp->conv == c)
 		{
-			printf("addr: %p\nitem: %c\nflag string: %s\nfield width %zu\npad type: %u\n\n", tmp, tmp->arg.c, tmp->format_str, tmp->field_width, tmp->pad_type);
+			printf("addr: %p\nitem: %c\nflag string: %s\nfield width %u\npad type: %u\n\n", tmp, tmp->arg.c, tmp->format_str, tmp->field_width, tmp->pad_type);
 		}
 		else if (tmp->conv == d)
 		{
