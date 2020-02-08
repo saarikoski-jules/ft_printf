@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/14 13:02:19 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/02/05 17:55:36 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/02/08 22:25:51 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,14 +73,14 @@ typedef	enum	e_transition_code
 }				t_transition_code;
 
 //I can do this
-t_transition_code entry_state(char token, t_printf_arg **arg);
-t_transition_code dash_state(char token, t_printf_arg **arg);
-t_transition_code zero_state(char token, t_printf_arg **arg);
-t_transition_code num_state(char token, t_printf_arg **arg);
-t_transition_code num_dash_state(char token, t_printf_arg **arg);
-t_transition_code error_state(char token, t_printf_arg **arg);
-t_transition_code error_dash_state(char token, t_printf_arg **arg);
-t_transition_code exit_state(char token, t_printf_arg **arg);
+void entry_state(char token, t_printf_arg **arg);
+void dash_state(char token, t_printf_arg **arg);
+void zero_state(char token, t_printf_arg **arg);
+void num_state(char token, t_printf_arg **arg);
+void num_dash_state(char token, t_printf_arg **arg);
+void error_state(char token, t_printf_arg **arg);
+void error_dash_state(char token, t_printf_arg **arg);
+void exit_state(char token, t_printf_arg **arg);
 
 
 t_transition_code get_transition_code(char token);
@@ -128,9 +128,9 @@ t_transition_code get_transition_code(char token);
 
 typedef struct s_transition_obj
 {
-	t_transition_code	(*orig_state)(char, t_printf_arg **);
+	void				(*orig_state)(char, t_printf_arg **);
 	t_transition_code	transition;
-	t_transition_code	(*next_state)(char, t_printf_arg **);
+	void				(*next_state)(char, t_printf_arg **);
 }				t_transition_obj;
 
 // make sure if you've ever been to a dash_state, you'll never be able to enter a zero_state

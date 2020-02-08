@@ -18,6 +18,7 @@ void			print_lst(t_printf_arg **head)
 	{
 		if (tmp->conv == c)
 		{
+			printf("true???\n");
 			printf("addr: %p\nitem: %c\nflag string: %s\nfield width %u\npad type: %u\n\n", tmp, tmp->arg.c, tmp->format_str, tmp->field_width, tmp->pad_type);
 		}
 		else if (tmp->conv == d)
@@ -136,11 +137,14 @@ void	gen_arg_list(t_printf_arg **head, const char *str, va_list ap)
 			// AKA pass the string and current arg to the parser.
 			manage_parser(&cur, cur->format_str);
 			i += ft_strchrset(str + i + 1, convs);
+			printf("%d, %c\n", i, str[i + 1]);
 			if (str[i + 1] == 'c')
 			{
+				// printf("true\n");
 				// cur = gen_elem(head);
 				cur->arg.c = va_arg(ap, unsigned int);
 				cur->conv = c;
+				// printf("cur->arg.c\n", )
 			}
 			else if (str[i + 1] == 'd')
 			{
@@ -251,7 +255,7 @@ int main()
 	char c;
 	int i = -12;
 
-	ft_printf("%012c", s);
+	ft_printf("%-012c", 's');
 	// ft_printf("str %12c, %000-s, %c, %c, %d, %d, %X, %p, %x %u %%", 'c', "I'm a string", '9', '2', 7, 12, 12, &c, 12, i);
 	// printf("why");
 	return (0);
