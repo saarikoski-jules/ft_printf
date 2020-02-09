@@ -62,12 +62,12 @@ int main()
 	// printf("%    d\n", 12);
 
 	int u = 0;
-	int d = -12;
+	int d = 12;
 	char str[] = "str";
 
 	// printf("u as d %d\nu as u %u\nd as d %d\nd as u %u\n", u, u, d, d);
 
-	printf("'%-1230d'\n", 12);
+	printf("%.090d|\n", 2);
 	// unsigned int is the same as int but cannot be neg
 
 	return (0);
@@ -103,7 +103,7 @@ int main()
 
 // - field width, but param left aligned
 // 0 pads with the amount of zeroes specified, eg ("%02d", -2) prints -002. Ignored when - flag present
-// . precision
+// . precision (Only applies for floats?)
 // * Field width or precision can be * instead of a number. In this case you can supply number as parameter. The value of * is supplied before the value of conversion
 // minimum field width: number before conversion, width of the field is as atleast as long as the parameter or field width, whichever is shorter
 

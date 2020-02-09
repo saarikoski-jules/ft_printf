@@ -78,6 +78,8 @@ t_transition_code get_transition(void state(char, t_printf_arg **), char token, 
 		return (t_dash);
 	else if (token == '0')
 		return (t_zero);
+	else if (token == '.')
+		return (t_dot);
 	else if (token <= '9' && token >= '1')
 		return (t_num);
 	else if (token == '\0')
@@ -108,6 +110,7 @@ void manage_parser(t_printf_arg **arg, char *tokens)
 				return ;
 			if ((&transition_table[j])->orig_state == state && (&transition_table[j])->transition == transition)
 			{
+				// printf("new transition: %d\n", j);
 				state = (&transition_table[j])->next_state;
 				break;
 			}

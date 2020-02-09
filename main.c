@@ -18,12 +18,15 @@ void			print_lst(t_printf_arg **head)
 	{
 		if (tmp->conv == c)
 		{
-			printf("true???\n");
-			printf("addr: %p\nitem: %c\nflag string: %s\nfield width %u\npad type: %u\n\n", tmp, tmp->arg.c, tmp->format_str, tmp->field_width, tmp->pad_type);
+			// printf("true???\n");
+			printf("addr: %p\nitem: %c\nflag string: %s\nfield width %zu\npad type: %u\n\n", tmp, tmp->arg.c, tmp->format_str, tmp->field_width, tmp->pad_type);
 		}
 		else if (tmp->conv == d)
 		{
-			printf("d: %p\n%d\nflag string: %s\n\n", tmp, tmp->arg.d, tmp->format_str);
+			printf("addr: %p\nitem: %d\nflag string: %s\nfield width %zu\npad type: %u\nprecision: %zu\n\n", tmp, tmp->arg.d, tmp->format_str, tmp->field_width, tmp->pad_type, tmp->precision);
+
+
+			// printf("d: %p\n%d\nflag string: %s\n\n", tmp, tmp->arg.d, tmp->format_str);
 		}
 		else if (tmp->conv == i)
 		{
@@ -255,7 +258,7 @@ int main()
 	char c;
 	int i = -12;
 
-	ft_printf("%-012c", 's');
+	ft_printf("%-010210.100d ", 12);
 	// ft_printf("str %12c, %000-s, %c, %c, %d, %d, %X, %p, %x %u %%", 'c', "I'm a string", '9', '2', 7, 12, 12, &c, 12, i);
 	// printf("why");
 	return (0);

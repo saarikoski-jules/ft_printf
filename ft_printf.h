@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/14 13:02:19 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/02/08 22:25:51 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/02/09 23:14:12 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,11 @@ typedef struct	s_printf_arg
 	t_conversion			conv;
 	t_type					arg;
 	t_padding				pad_type;
-	unsigned int			field_width;
+	size_t					field_width;
+	size_t					precision;
 	// unsigned int			width; //should i use size_t?
 	char					*format_str;
+	// int						num_break;
 	struct s_printf_arg		*next;
 }				t_printf_arg;
 
@@ -68,6 +70,7 @@ typedef	enum	e_transition_code
 	t_dash,
 	t_zero,
 	t_num,
+	t_dot,
 	t_error,
 	t_exit,
 }				t_transition_code;
@@ -77,9 +80,13 @@ void entry_state(char token, t_printf_arg **arg);
 void dash_state(char token, t_printf_arg **arg);
 void zero_state(char token, t_printf_arg **arg);
 void num_state(char token, t_printf_arg **arg);
-void num_dash_state(char token, t_printf_arg **arg);
+void num_repeat_state(char token, t_printf_arg **arg);
+void prec_state(char token, t_printf_arg **arg);
+void prec_num_state(char token, t_printf_arg **arg);
+void prec_num_repeat_state(char token, t_printf_arg **arg);
+// void num_dash_state(char token, t_printf_arg **arg);
 void error_state(char token, t_printf_arg **arg);
-void error_dash_state(char token, t_printf_arg **arg);
+// void error_dash_state(char token, t_printf_arg **arg);
 void exit_state(char token, t_printf_arg **arg);
 
 
@@ -135,51 +142,113 @@ typedef struct s_transition_obj
 
 // make sure if you've ever been to a dash_state, you'll never be able to enter a zero_state
 
+// static t_transition_obj const transition_table[] =
+// {
+// 	{entry_state, t_dash, dash_state},
+// 	{entry_state, t_zero, zero_state},
+// 	{entry_state, t_num, num_state},
+// 	{entry_state, t_error, error_state},
+// 	{entry_state, t_exit, exit_state},
+
+// 	{dash_state, t_dash, dash_state},
+// 	{dash_state, t_zero, dash_state},
+// 	{dash_state, t_num, num_dash_state},
+// 	{dash_state, t_error, error_dash_state},
+// 	{dash_state, t_exit, exit_state},
+
+// 	{num_dash_state, t_dash, dash_state},
+// 	{num_dash_state, t_zero, num_dash_state},
+// 	{num_dash_state, t_num, num_dash_state},
+// 	{num_dash_state, t_error, error_dash_state},
+// 	{num_dash_state, t_exit, exit_state},
+
+// 	{error_dash_state, t_dash, dash_state},
+// 	{error_dash_state, t_zero, dash_state},
+// 	{error_dash_state, t_num, num_dash_state}, //overwrite
+// 	{error_dash_state, t_error, error_dash_state},
+// 	{error_dash_state, t_exit, exit_state},
+
+// 	{zero_state, t_dash, dash_state},
+// 	{zero_state, t_zero, zero_state},
+// 	{zero_state, t_num, num_state},
+// 	{zero_state, t_error, error_state},
+// 	{zero_state, t_exit, exit_state},
+
+// 	{num_state, t_dash, dash_state}, //undefined behavior in real printf
+// 	{num_state, t_zero, num_state},
+// 	{num_state, t_num, num_state},
+// 	{num_state, t_error, error_state},
+// 	{num_state, t_exit, exit_state},
+
+// 	{error_state, t_dash, dash_state},
+// 	{error_state, t_zero, zero_state},
+// 	{error_state, t_num, num_state}, //previous num overwritten
+// 	{error_state, t_error, error_state},
+// 	{error_state, t_exit, exit_state},
+// };
+
+
 static t_transition_obj const transition_table[] =
 {
 	{entry_state, t_dash, dash_state},
 	{entry_state, t_zero, zero_state},
 	{entry_state, t_num, num_state},
+	{entry_state, t_dot, prec_state},
 	{entry_state, t_error, error_state},
 	{entry_state, t_exit, exit_state},
 
 	{dash_state, t_dash, dash_state},
 	{dash_state, t_zero, dash_state},
-	{dash_state, t_num, num_dash_state},
-	{dash_state, t_error, error_dash_state},
+	{dash_state, t_num, num_state},
+	{dash_state, t_dot, prec_state},
+	{dash_state, t_error, error_state},
 	{dash_state, t_exit, exit_state},
-
-	{num_dash_state, t_dash, dash_state},
-	{num_dash_state, t_zero, num_dash_state},
-	{num_dash_state, t_num, num_dash_state},
-	{num_dash_state, t_error, error_dash_state},
-	{num_dash_state, t_exit, exit_state},
-
-	{error_dash_state, t_dash, dash_state},
-	{error_dash_state, t_zero, dash_state},
-	{error_dash_state, t_num, num_dash_state}, //overwrite
-	{error_dash_state, t_error, error_dash_state},
-	{error_dash_state, t_exit, exit_state},
 
 	{zero_state, t_dash, dash_state},
 	{zero_state, t_zero, zero_state},
 	{zero_state, t_num, num_state},
+	{zero_state, t_dot, prec_state},
 	{zero_state, t_error, error_state},
 	{zero_state, t_exit, exit_state},
 
-	{num_state, t_dash, num_state}, //undefined behavior in real printf
-	{num_state, t_zero, num_state},
-	{num_state, t_num, num_state},
+	{num_state, t_dash, dash_state}, //undefined behavior in real printf
+	{num_state, t_zero, num_repeat_state},
+	{num_state, t_num, num_repeat_state},
+	{num_state, t_dot, prec_state},
 	{num_state, t_error, error_state},
 	{num_state, t_exit, exit_state},
+
+	{num_repeat_state, t_dash, dash_state},
+	{num_repeat_state, t_zero, num_repeat_state},
+	{num_repeat_state, t_num, num_repeat_state},
+	{num_repeat_state, t_dot, prec_state},
+	{num_repeat_state, t_error, error_state},
+	{num_repeat_state, t_exit, exit_state},
+
+	{prec_state, t_dash, dash_state},
+	{prec_state, t_zero, zero_state},
+	{prec_state, t_num, prec_num_state},
+	{prec_state, t_dot, prec_state},//undefined behavior
+	{prec_state, t_error, error_state},
+	{prec_state, t_exit, exit_state},
+
+	{prec_num_state, t_dash, dash_state},
+	{prec_num_state, t_zero, prec_num_repeat_state},
+	{prec_num_state, t_num, prec_num_repeat_state},
+	{prec_num_state, t_dot, prec_state},
+	{prec_num_state, t_error, error_state},
+	{prec_num_state, t_exit, exit_state},
+
+	//prec_num_repeat_state
 
 	{error_state, t_dash, dash_state},
 	{error_state, t_zero, zero_state},
 	{error_state, t_num, num_state}, //previous num overwritten
+	{error_state, t_dot, prec_state},
 	{error_state, t_error, error_state},
 	{error_state, t_exit, exit_state},
-};
 
+};
 
 #endif
 
