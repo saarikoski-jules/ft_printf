@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/05 15:01:56 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/02/08 22:26:53 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/02/10 16:40:14 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,15 @@
 void entry_state(char token, t_printf_arg **arg)
 {
 	printf("enter\n");//
+	(void)token;
+	(*arg)->pad_type = p_normal;
+	(*arg)->field_width = 0;
+	(*arg)->precision = 0;
 }
 
 void exit_state(char token, t_printf_arg **arg)
 {
+	(void)token;
+	(void)(*arg);
 	printf("exit\n");
 }

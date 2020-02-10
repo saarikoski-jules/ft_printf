@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/14 13:02:19 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/02/09 23:14:12 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/02/10 16:45:56 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,9 @@ typedef struct	s_printf_arg
 	t_padding				pad_type;
 	size_t					field_width;
 	size_t					precision;
-	// unsigned int			width; //should i use size_t?
-	char					*format_str;
-	// int						num_break;
 	struct s_printf_arg		*next;
 }				t_printf_arg;
 
-char	*ft_itoa_base(int n, int base);
-// void	parse_current(t_transition_code state(char), char token, t_printf_arg **arg);
-void	manage_parser(t_printf_arg **arg, char *tokens);
 
 typedef	enum	e_transition_code
 {
@@ -228,7 +222,7 @@ static t_transition_obj const transition_table[] =
 	{prec_state, t_dash, dash_state},
 	{prec_state, t_zero, zero_state},
 	{prec_state, t_num, prec_num_state},
-	{prec_state, t_dot, prec_state},//undefined behavior
+	{prec_state, t_dot, prec_state}, //undefined behavior
 	{prec_state, t_error, error_state},
 	{prec_state, t_exit, exit_state},
 
@@ -239,7 +233,12 @@ static t_transition_obj const transition_table[] =
 	{prec_num_state, t_error, error_state},
 	{prec_num_state, t_exit, exit_state},
 
-	//prec_num_repeat_state
+	{prec_num_repeat_state, t_dash, dash_state},
+	{prec_num_repeat_state, t_zero, prec_num_repeat_state},
+	{prec_num_repeat_state, t_num, prec_num_repeat_state},
+	{prec_num_repeat_state, t_dot, prec_state},
+	{prec_num_repeat_state, t_error, error_state},
+	{prec_num_repeat_state, t_exit, exit_state},
 
 	{error_state, t_dash, dash_state},
 	{error_state, t_zero, zero_state},
@@ -249,6 +248,11 @@ static t_transition_obj const transition_table[] =
 	{error_state, t_exit, exit_state},
 
 };
+
+char	*ft_itoa_base(int n, int base);
+// void	parse_current(t_transition_code state(char), char token, t_printf_arg **arg);
+void	manage_parser(t_printf_arg **arg, char *tokens);
+t_transition_code get_transition(char token);
 
 #endif
 

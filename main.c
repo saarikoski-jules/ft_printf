@@ -8,49 +8,49 @@
 void			print_lst(t_printf_arg **head)
 {
 	t_printf_arg *tmp;
-	int i;
+	// int i;
 
 	tmp = *head;
-	i = 0;
-	int count = 0;
+	// i = 0;
+	// int count = 0;
 	printf("\n---------------PRINT_LST BEGIN---------------\n");
 	while (tmp != NULL)
 	{
 		if (tmp->conv == c)
 		{
 			// printf("true???\n");
-			printf("addr: %p\nitem: %c\nflag string: %s\nfield width %zu\npad type: %u\n\n", tmp, tmp->arg.c, tmp->format_str, tmp->field_width, tmp->pad_type);
+			printf("addr: %p\nitem: %c\nfield width %zu\npad type: %u\n\n", tmp, tmp->arg.c, tmp->field_width, tmp->pad_type);
 		}
 		else if (tmp->conv == d)
 		{
-			printf("addr: %p\nitem: %d\nflag string: %s\nfield width %zu\npad type: %u\nprecision: %zu\n\n", tmp, tmp->arg.d, tmp->format_str, tmp->field_width, tmp->pad_type, tmp->precision);
+			printf("addr: %p\nitem: %d\nfield width %zu\npad type: %u\nprecision: %zu\n\n", tmp, tmp->arg.d, tmp->field_width, tmp->pad_type, tmp->precision);
 
 
 			// printf("d: %p\n%d\nflag string: %s\n\n", tmp, tmp->arg.d, tmp->format_str);
 		}
-		else if (tmp->conv == i)
-		{
-			printf("i: %p\n%i\nflag string: %s\n\n", tmp, tmp->arg.i, tmp->format_str);
-		}
-		else if (tmp->conv == u)
-		{
-			printf("u: %p\n%u\nflag string: %s\n\n", tmp, tmp->arg.i, tmp->format_str);
-		}
-		else if (tmp->conv == s)
-		{
-			printf("s: %p\n%s\nflag string: %s\n\n", tmp, tmp->arg.s, tmp->format_str);
-		}
-		else if (tmp->conv == X)
-		{
-			printf("X: %p\n%X\nflag string: %s\n\n", tmp, tmp->arg.X, tmp->format_str);
-		}
-		else if (tmp->conv == x)
-		{
-			printf("x: %p\n%x\nflag string: %s\n\n", tmp, tmp->arg.x, tmp->format_str);
-		}
-		else if (tmp->conv == p)
-		{
-			printf("p: %p\n%p\nflag string: %s\n\n", tmp, tmp->arg.p, tmp->format_str);
+		// else if (tmp->conv == i)
+		// {
+		// 	printf("i: %p\n%i\nflag string: %s\n\n", tmp, tmp->arg.i, tmp->format_str);
+		// }
+		// else if (tmp->conv == u)
+		// {
+		// 	printf("u: %p\n%u\nflag string: %s\n\n", tmp, tmp->arg.i, tmp->format_str);
+		// }
+		// else if (tmp->conv == s)
+		// {
+		// 	printf("s: %p\n%s\nflag string: %s\n\n", tmp, tmp->arg.s, tmp->format_str);
+		// }
+		// else if (tmp->conv == X)
+		// {
+		// 	printf("X: %p\n%X\nflag string: %s\n\n", tmp, tmp->arg.X, tmp->format_str);
+		// }
+		// else if (tmp->conv == x)
+		// {
+		// 	printf("x: %p\n%x\nflag string: %s\n\n", tmp, tmp->arg.x, tmp->format_str);
+		// }
+		// else if (tmp->conv == p)
+		// {
+		// 	printf("p: %p\n%p\nflag string: %s\n\n", tmp, tmp->arg.p, tmp->format_str);
 
 			// PRINT POINTER
 			// long c = tmp->arg.p;
@@ -72,7 +72,7 @@ void			print_lst(t_printf_arg **head)
 			// write(1, "p: 0x", 5);
 			// write(1, hex, 12);
 			// write(1, "\n", 1);
-		}
+		// }
 		// else if (tmp-)
 		tmp = tmp->next;
 	}
@@ -89,9 +89,6 @@ t_printf_arg	*gen_elem(t_printf_arg **head)
 		return (NULL);
 	printf("New item: %p\n", new);
 	new->next = NULL;
-	new->field_width = 0;
-	new->pad_type = p_normal;
-	// new->arg.c = '0';
 	if (*head == NULL)
 	{
 		*head = new;
@@ -125,8 +122,9 @@ void	gen_arg_list(t_printf_arg **head, const char *str, va_list ap)
 {
 	int				i;
 	t_printf_arg	*cur;
-	char			item;
+	// char			item;
 	char			*convs = "cspdiuxX%";
+	char			*format_str;
 
 	i = 0;
 	while(str[i] != '\0')
@@ -136,9 +134,9 @@ void	gen_arg_list(t_printf_arg **head, const char *str, va_list ap)
 		if (str[i] == '%')
 		{
 			cur = gen_elem(head);
-			cur->format_str = ft_strdupchr(str + i + 1, convs); //Instead of this, directly parse the information into a usable format in the struct.
+			format_str = ft_strdupchr(str + i + 1, convs); //Instead of this, directly parse the information into a usable format in the struct.
 			// AKA pass the string and current arg to the parser.
-			manage_parser(&cur, cur->format_str);
+			manage_parser(&cur, format_str);
 			i += ft_strchrset(str + i + 1, convs);
 			printf("%d, %c\n", i, str[i + 1]);
 			if (str[i + 1] == 'c')
@@ -211,13 +209,13 @@ int ft_printf(const char *str, ...)
 {
 
 	t_printf_arg	*head;
-	t_printf_arg	*cur;
+	// t_printf_arg	*cur;
 	va_list			ap;
-	int				i;
-	int				count;
+	// int				i;
+	// int				count;
 
-	i = 0;
-	count = 0;
+	// i = 0;
+	// count = 0;
 	head = NULL;
 	va_start(ap, str);
 
@@ -255,10 +253,10 @@ int ft_printf(const char *str, ...)
 
 int main()
 {
-	char c;
-	int i = -12;
+	// char c;
+	// int i = -12;
 
-	ft_printf("%-010210.100d ", 12);
+	ft_printf("%010210.100.12-2.7-00000d ", 12);
 	// ft_printf("str %12c, %000-s, %c, %c, %d, %d, %X, %p, %x %u %%", 'c', "I'm a string", '9', '2', 7, 12, 12, &c, 12, i);
 	// printf("why");
 	return (0);

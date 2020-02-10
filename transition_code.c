@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   error_state.c                                      :+:    :+:            */
+/*   transition_code.c                                  :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/05 15:02:01 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/02/10 16:35:44 by jsaariko      ########   odam.nl         */
+/*   Created: 2020/02/10 16:29:43 by jsaariko       #+#    #+#                */
+/*   Updated: 2020/02/10 16:45:46 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void error_state(char token, t_printf_arg **arg)
+t_transition_code	get_transition(char token)
 {
-	printf("error\n");
-	(void)token;
-	(void)(*arg);
+	if (token == '-')
+		return (t_dash);
+	else if (token == '0')
+		return (t_zero);
+	else if (token == '.')
+		return (t_dot);
+	else if (token <= '9' && token >= '1')
+		return (t_num);
+	else if (token == '\0')
+		return (t_exit);
+	else
+		return (t_error);
 }
-
-// void error_dash_state(char token, t_printf_arg **arg)
-// {
-// 	printf("error dash\n");
-// }
