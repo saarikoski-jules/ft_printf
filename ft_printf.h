@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/14 13:02:19 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/02/10 16:45:56 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/02/11 18:24:23 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct	s_printf_arg
 	t_padding				pad_type;
 	size_t					field_width;
 	size_t					precision;
+	char					*str;
 	struct s_printf_arg		*next;
 }				t_printf_arg;
 
@@ -249,10 +250,16 @@ static t_transition_obj const transition_table[] =
 
 };
 
+int		ft_printf(const char *str, ...);
 char	*ft_itoa_base(int n, int base);
 // void	parse_current(t_transition_code state(char), char token, t_printf_arg **arg);
 void	manage_parser(t_printf_arg **arg, char *tokens);
 t_transition_code get_transition(char token);
+int manage_print(const char *str, t_printf_arg **head);
+char *execute_arg(t_printf_arg *cur_arg);
+void convert_char(t_printf_arg *arg, char **str);
+void convert_int(t_printf_arg *arg, char **str);
+void convert_str(t_printf_arg *arg, char **str);
 
 #endif
 

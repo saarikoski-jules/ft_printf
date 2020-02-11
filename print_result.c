@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   base_state.c                                       :+:    :+:            */
+/*   print_result.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/05 15:01:56 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/02/11 11:55:38 by jsaariko      ########   odam.nl         */
+/*   Created: 2020/02/11 12:05:50 by jsaariko       #+#    #+#                */
+/*   Updated: 2020/02/11 17:33:55 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void entry_state(char token, t_printf_arg **arg)
+int manage_print(const char *str, t_printf_arg **head)
 {
-	printf("enter\n");//
-	(void)token;
-	(void)(*arg);
-	// (*arg)->pad_type = p_normal;
-	// (*arg)->field_width = 0;
-	// (*arg)->precision = 0;
-}
+	t_printf_arg	*cur_arg;
+	char			*arg_str;
 
-void exit_state(char token, t_printf_arg **arg)
-{
-	(void)token;
-	(void)(*arg);
-	printf("exit\n");
+	cur_arg = *head;
+	while (cur_arg != NULL)
+	{	
+		arg_str = execute_arg(cur_arg);
+		printf("PRINT ARG: %s\n", arg_str);
+		cur_arg= cur_arg->next;
+	}
+	(void)str;
+	return (1);
 }

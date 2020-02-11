@@ -1,30 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   base_state.c                                       :+:    :+:            */
+/*   convert_char.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/05 15:01:56 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/02/11 11:55:38 by jsaariko      ########   odam.nl         */
+/*   Created: 2020/02/11 11:37:29 by jsaariko       #+#    #+#                */
+/*   Updated: 2020/02/11 18:36:49 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void entry_state(char token, t_printf_arg **arg)
+void	convert_char(t_printf_arg *arg, char **str)
 {
-	printf("enter\n");//
-	(void)token;
-	(void)(*arg);
-	// (*arg)->pad_type = p_normal;
-	// (*arg)->field_width = 0;
-	// (*arg)->precision = 0;
-}
-
-void exit_state(char token, t_printf_arg **arg)
-{
-	(void)token;
-	(void)(*arg);
-	printf("exit\n");
+	*str = ft_strjoinchar(*str, arg->arg.c);
 }

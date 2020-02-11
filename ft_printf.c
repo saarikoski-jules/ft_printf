@@ -89,6 +89,10 @@ t_printf_arg	*gen_elem(t_printf_arg **head)
 		return (NULL);
 	printf("New item: %p\n", new);
 	new->next = NULL;
+	new->str = NULL;
+	new->pad_type = p_normal;
+	new->field_width = 0;
+	new->precision = 0;
 	if (*head == NULL)
 	{
 		*head = new;
@@ -143,7 +147,7 @@ void	gen_arg_list(t_printf_arg **head, const char *str, va_list ap)
 			{
 				// printf("true\n");
 				// cur = gen_elem(head);
-				cur->arg.c = va_arg(ap, unsigned int);
+				cur->arg.c = (char)va_arg(ap, int);
 				cur->conv = c;
 				// printf("cur->arg.c\n", )
 			}
@@ -248,16 +252,8 @@ int ft_printf(const char *str, ...)
 
 	va_end(ap);
 	print_lst(&head);
-	return (0);
-}
 
-int main()
-{
-	// char c;
-	// int i = -12;
+	manage_print(str, &head);
 
-	ft_printf("%010210.100.12-2.7-00000d ", 12);
-	// ft_printf("str %12c, %000-s, %c, %c, %d, %d, %X, %p, %x %u %%", 'c', "I'm a string", '9', '2', 7, 12, 12, &c, 12, i);
-	// printf("why");
 	return (0);
 }
