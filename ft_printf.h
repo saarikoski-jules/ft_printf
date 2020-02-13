@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/14 13:02:19 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/02/13 13:42:07 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/02/13 17:59:46 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,7 +182,6 @@ typedef struct s_transition_obj
 // 	{error_state, t_exit, exit_state},
 // };
 
-
 static t_transition_obj const transition_table[] =
 {
 	{entry_state, t_dash, dash_state},
@@ -260,6 +259,10 @@ char *execute_arg(t_printf_arg *cur_arg);
 void convert_char(t_printf_arg *arg, char **str);
 void convert_int(t_printf_arg *arg, char **str);
 void convert_str(t_printf_arg *arg, char **str);
+void convert_hex_lc(t_printf_arg *arg, char **str);
+void convert_hex_uc(t_printf_arg *arg, char **str);
+void convert_ptr(t_printf_arg *arg, char **str);
+
 
 #endif
 
