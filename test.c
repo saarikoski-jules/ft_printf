@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "ft_printf.h"
-#include "libft/libft.h"
+#include "libft.h"
 
 // char *ft_itoa_base(int n, int base);
 
