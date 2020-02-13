@@ -1,8 +1,14 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "ft_printf.h"
 #include "libft/libft.h"
 
 // char *ft_itoa_base(int n, int base);
+
+void frunc(long value)
+{
+	printf("%ld", value);
+}
 
 int main()
 {
@@ -61,14 +67,24 @@ int main()
 	// printf("d = %d\ni = %i\no = %o\nu = %u\nx = %x\nX = %X\nc = %c\n", d, d, d, d, d, d, *str);
 	// printf("%    d\n", 12);
 
-	int u = 0;
-	int d = 12;
-	char str[] = "str";
+	// int u = 0;
+	// int d = 12;
+	// char str[] = "str";
 
 	// printf("u as d %d\nu as u %u\nd as d %d\nd as u %u\n", u, u, d, d);
 
-	printf("%.090d|\n", 2);
+	// printf("%.090d|\n", 2);
 	// unsigned int is the same as int but cannot be neg
+	unsigned long long value = 12345678912345678912ull;
+	long convert = 123456789123456;
+
+	printf("%llu\n", value);
+
+	char *str = (char *)malloc(100);
+
+	frunc(-1);
+	// printf("ltostr: %s\n", ltostr(str, convert, 10));
+	// printf("str: %s\n", str);
 
 	return (0);
 }
@@ -110,3 +126,10 @@ int main()
 // Printf structure
 
 // %[flag][field width][precision][conversion]
+
+//printf 0123 will see this as the octal 123, which in base 10 is 83, as it is printed as d
+//printf 0x123 will see this as the hex 123, which in base 10 is 291, as it is printed as d
+
+//numbers are always cast into a signed integer type unless u (unsigned) (max being llu) is specified at the end of the argument
+
+//I want to write an ltoa_base that will accept min signed long long and max unsigned long long as the same param. 
