@@ -6,7 +6,7 @@
 #    By: jsaariko <jsaariko@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/12/03 20:38:39 by jsaariko       #+#    #+#                 #
-#    Updated: 2020/02/13 17:27:19 by jsaariko      ########   odam.nl          #
+#    Updated: 2020/02/16 15:34:04 by jsaariko      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,7 @@ all: main test
 
 
 main:
-	gcc -Wall -Wextra -Werror -o ft testmain.c ft_printf.c parse.c base_state.c num_state.c error_state.c dash_state.c zero_state.c precision_state.c transition_code.c print_result.c execute.c convert_char.c convert_int.c convert_hex.c convert_str.c convert_ptr.c -Ilibft -Llibft -lft
+	gcc -Wall -Wextra -Werror -o ft testmain.c ft_printf.c parse.c base_state.c num_state.c error_state.c dash_state.c zero_state.c precision_state.c transition_code.c print_result.c execute.c convert_char.c convert_int.c convert_hex.c convert_str.c convert_ptr.c clear_list.c apply_fw.c -Ilibft -Llibft -lft
 
 test:
 	gcc -o real test.c ft_itoa_base.c ft_numlen_base.c -Ilibft -Llibft -lft

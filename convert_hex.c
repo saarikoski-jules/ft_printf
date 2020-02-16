@@ -6,19 +6,25 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/13 16:29:44 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/02/13 17:21:07 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/02/16 15:40:49 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void convert_hex_lc(t_printf_arg *arg, char **str)
+char *convert_hex_lc(t_printf_arg *arg)
 {
-	*str = ft_lltoa_base(arg->arg.x, 16);
-	*str = ft_tolowerstr(*str);
+	char *tmp;
+
+	tmp = ft_lltoa_base(arg->arg.x, 16);
+	ft_tolowerstr(&tmp);
+	return (tmp);
 }
 
-void convert_hex_uc(t_printf_arg *arg, char **str)
+char *convert_hex_uc(t_printf_arg *arg)
 {
-	*str = ft_lltoa_base(arg->arg.X, 16);
+	char *tmp;
+	
+	tmp = ft_lltoa_base(arg->arg.X, 16);
+	return (tmp);
 }

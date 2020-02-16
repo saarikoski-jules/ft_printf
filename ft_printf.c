@@ -87,9 +87,9 @@ t_printf_arg	*gen_elem(t_printf_arg **head)
 	new = malloc(sizeof(t_printf_arg));
 	if (!new)
 		return (NULL);
-	printf("New item: %p\n", new);
+	// printf("New item: %p\n", new);
 	new->next = NULL;
-	new->str = NULL;
+	// new->str = NULL;
 	new->pad_type = p_normal;
 	new->field_width = 0;
 	new->precision = 0;
@@ -142,7 +142,7 @@ void	gen_arg_list(t_printf_arg **head, const char *str, va_list ap)
 			// AKA pass the string and current arg to the parser.
 			manage_parser(&cur, format_str);
 			i += ft_strchrset(str + i + 1, convs);
-			printf("%d, %c\n", i, str[i + 1]);
+			// printf("%d, %c\n", i, str[i + 1]);
 			if (str[i + 1] == 'c')
 			{
 				// printf("true\n");
@@ -203,6 +203,7 @@ void	gen_arg_list(t_printf_arg **head, const char *str, va_list ap)
 			// cur = gen_elem(head);
 			// cur->arg = va_arg(ap, void*);
 			i++;
+			free(format_str);
 		}
 		i++;
 	}
@@ -251,9 +252,11 @@ int ft_printf(const char *str, ...)
 	// printf("%s\n", va_arg(ap, char*));
 
 	va_end(ap);
-	print_lst(&head);
+	// print_lst(&head);
 
 	manage_print(str, &head);
+
+	clear_list(&head);
 
 	return (0);
 }

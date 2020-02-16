@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/14 13:02:19 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/02/13 17:59:46 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/02/16 15:41:27 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ typedef struct	s_printf_arg
 	t_padding				pad_type;
 	size_t					field_width;
 	size_t					precision;
-	char					*str;
+	// char					*str;
 	struct s_printf_arg		*next;
 }				t_printf_arg;
 
@@ -256,13 +256,14 @@ void	manage_parser(t_printf_arg **arg, char *tokens);
 t_transition_code get_transition(char token);
 int manage_print(const char *str, t_printf_arg **head);
 char *execute_arg(t_printf_arg *cur_arg);
-void convert_char(t_printf_arg *arg, char **str);
-void convert_int(t_printf_arg *arg, char **str);
-void convert_str(t_printf_arg *arg, char **str);
-void convert_hex_lc(t_printf_arg *arg, char **str);
-void convert_hex_uc(t_printf_arg *arg, char **str);
-void convert_ptr(t_printf_arg *arg, char **str);
-
+char *convert_char(t_printf_arg *arg);
+char *convert_int(t_printf_arg *arg);
+char *convert_str(t_printf_arg *arg);
+char *convert_hex_lc(t_printf_arg *arg);
+char *convert_hex_uc(t_printf_arg *arg);
+char *convert_ptr(t_printf_arg *arg);
+void clear_list(t_printf_arg **head);
+char *apply_fw(t_printf_arg *arg);
 
 #endif
 
