@@ -8,15 +8,50 @@ int main()
 	char *str;
 	str = ft_strdup("string");
 
-	// ft_printf("%c\n", 'c');
-	// ft_printf("%d\n", 12);
-	// ft_printf("%012s\n", str);
-	// ft_printf("%x\n", 12);
-	// ft_printf("%X\n", 12);
-	ft_printf("%16p\n", str);
-	printf("real printf: '%16p'\n", str);
-	// ft_printf("%-60p\n", str + 1);
-	// ft_printf("%-12s\n", "");
+	int d = 12;
+
+	ft_printf("%.7x\n", d);
+	printf("'%.7x'\n", d);
+
+	ft_printf("'%.20c'\n", 'c');
+	printf("c: '%.20c'\n", 'c');
+	ft_printf("'%.20d'\n", 12);
+	printf("d: '%.20d'\n", 12);
+	ft_printf("'%.20s'\n", str);
+	printf("s: '%.20s'\n", str);
+	ft_printf("'%.20x'\n", 12);
+	printf("x: '%.20x'\n", 12);
+	ft_printf("'%.20X'\n", 12);
+	printf("X: '%.20X'\n", 12);
+	ft_printf("'%.20p'\n", 012);
+	printf("p: '%.20p'\n", 012);
+	ft_printf("%.20p\n", str + 1);
+	printf("p: '%.20p'\n", str + 1);
+	ft_printf("%.20s\n", "");
+	printf("s: '%.20s'\n", "");
+
+
+	// ft_printf("'%20c'\n", 'c');
+	// printf("c: '%20c'\n", 'c');
+	// ft_printf("'%20d'\n", 12);
+	// printf("d: '%20d'\n", 12);
+	// ft_printf("'%20s'\n", str);
+	// printf("s: '%20s'\n", str);
+	// ft_printf("'%20x'\n", 12);
+	// printf("x: '%20x'\n", 12);
+	// ft_printf("'%20X'\n", 12);
+	// printf("X: '%20X'\n", 12);
+	// ft_printf("'%20p'\n", 012);
+	// printf("p: '%20p'\n", 012);
+	// ft_printf("%020p\n", str + 1);
+	// printf("p: '%020p'\n", str + 1);
+	// ft_printf("%20s\n", "");
+	// printf("s: '%20s'\n", "");
+
+
+	// printf("i: '%23.20i'\n", 12);
+	// printf("u: '%.20u'\n", 12);
+	// printf("o: '%.20o'\n", 12);
 
 	// printf("%c, %d, %s, %x, %X, %p, %p\n", 'c', 12, str, 12, 12, str, str + 1);
 	free(str);

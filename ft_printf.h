@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/14 13:02:19 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/02/16 18:05:56 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/02/16 21:00:15 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -263,8 +263,12 @@ char *convert_hex_lc(t_printf_arg *arg);
 char *convert_hex_uc(t_printf_arg *arg);
 char *convert_ptr(t_printf_arg *arg);
 void clear_list(t_printf_arg **head);
-char *apply_fw(t_printf_arg *arg, char *str);
+// char *fill_buffer(t_printf_arg *arg, char *str);
+char *fill_buffer(t_printf_arg *arg, char *conv_str);
+void cpy_from(char **final, char *conv, int index);
 void add_conv(char **final, char *conv, t_printf_arg *arg);
+char *apply_precision(t_printf_arg *arg, char *str);
+// void 
 
 #endif
 

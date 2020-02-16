@@ -84,7 +84,7 @@ t_printf_arg	*gen_elem(t_printf_arg **head)
 	t_printf_arg	*cur;
 	t_printf_arg	*new;
 
-	new = malloc(sizeof(t_printf_arg));
+	new = malloc(sizeof(t_printf_arg));//
 	if (!new)
 		return (NULL);
 	// printf("New item: %p\n", new);
@@ -127,7 +127,7 @@ void	gen_arg_list(t_printf_arg **head, const char *str, va_list ap)
 	int				i;
 	t_printf_arg	*cur;
 	// char			item;
-	char			*convs = "cspdiuxX%";
+	char			*convs = "cspdiuxX%";//
 	char			*format_str;
 
 	i = 0;
@@ -138,7 +138,8 @@ void	gen_arg_list(t_printf_arg **head, const char *str, va_list ap)
 		if (str[i] == '%')
 		{
 			cur = gen_elem(head);
-			format_str = ft_strdupchr(str + i + 1, convs); //Instead of this, directly parse the information into a usable format in the struct.
+			format_str = ft_strdupchr(str + i + 1, convs);//
+			//Instead of this, directly parse the information into a usable format in the struct.
 			// AKA pass the string and current arg to the parser.
 			manage_parser(&cur, format_str);
 			i += ft_strchrset(str + i + 1, convs);
@@ -149,7 +150,7 @@ void	gen_arg_list(t_printf_arg **head, const char *str, va_list ap)
 				// cur = gen_elem(head);
 				cur->arg.c = (char)va_arg(ap, int);
 				cur->conv = c;
-				// printf("cur->arg.c\n", )
+				// printf("cur->arg.c\n", cur->arg.c);
 			}
 			else if (str[i + 1] == 'd')
 			{
@@ -167,7 +168,7 @@ void	gen_arg_list(t_printf_arg **head, const char *str, va_list ap)
 			else if (str[i + 1] == 's')
 			{
 				// cur = gen_elem(head);
-				cur->arg.s = ft_strdup(va_arg(ap, char *));
+				cur->arg.s = ft_strdup(va_arg(ap, char *));//
 				cur->conv = s;
 			}
 			else if (str[i + 1] == 'X')
@@ -236,7 +237,7 @@ int ft_printf(const char *str, ...)
 	// 	i++;
 	// }
 
-	gen_arg_list(&head, str, ap);
+	gen_arg_list(&head, str, ap);//
 	// printf("done gen lst\n");
 	// printf("why");
 	// printf("end: %c\n", head->arg.c);
@@ -254,7 +255,7 @@ int ft_printf(const char *str, ...)
 	va_end(ap);
 	// print_lst(&head);
 
-	manage_print(str, &head);
+	manage_print(str, &head);//
 
 	clear_list(&head);
 

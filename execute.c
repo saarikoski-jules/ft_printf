@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/11 11:25:10 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/02/16 18:43:24 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/02/16 21:40:58 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,12 @@ char *execute_arg(t_printf_arg *arg)
 	final_str = NULL;
 	// tmp = ft_strdup("");
 	conv = choose_converter(arg);
-	conv_str = conv(arg);
-	final_str = apply_fw(arg, conv_str);
+	conv_str = conv(arg);//
 	// print_arg_str(final_str);
+
+	// printf("conv_str '%s'\n", conv_str);
+
+	final_str = fill_buffer(arg, conv_str);//
 
 	add_conv(&final_str, conv_str, arg);
 
@@ -76,7 +79,7 @@ char *execute_arg(t_printf_arg *arg)
 	//Separate function for appending strings the correct way
 
 	// printf("\nCONV: '%s'\nFINAL '%s'\n", conv_str, final_str);
-	printf("'%s'\n", final_str);
+	printf("'%s'", final_str);//
 
 	free(conv_str);
 	return (final_str);
@@ -84,3 +87,13 @@ char *execute_arg(t_printf_arg *arg)
 
 //TODO i
 //TODO u
+
+
+// precision applies to:
+// d
+// x
+// X
+// p
+// u
+// i
+// o
