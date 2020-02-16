@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/11 11:25:10 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/02/16 15:42:25 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/02/16 18:43:24 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,26 +43,43 @@ func choose_converter(t_printf_arg *cur_arg)
 	
 }
 
+void print_arg_str(char *str)
+{
+	int i;
+
+	i = 0;
+	while(str[i] != '\0')
+	{
+		printf("index: %d, current char: '%c'\n", i, str[i]);
+		i++;
+	}
+}
+
 char *execute_arg(t_printf_arg *arg)
 {
-	char			*tmp;
-	// char			*final_str;
-	char			*conv_str;
+	// char	*tmp;
+	char	*final_str;
+	char	*conv_str;
 	func	conv;
 
-	tmp = NULL;
+	final_str = NULL;
 	// tmp = ft_strdup("");
-	tmp = apply_fw(arg);
 	conv = choose_converter(arg);
 	conv_str = conv(arg);
+	final_str = apply_fw(arg, conv_str);
+	// print_arg_str(final_str);
 
-	//convert item to string
+	add_conv(&final_str, conv_str, arg);
+
+	// print_arg_str(final_str);
+
 	//Separate function for appending strings the correct way
 
-	printf("\n\nFILLED MAIN STR: %s\nCONVERSION STR %s\n\n", conv_str, tmp);
+	// printf("\nCONV: '%s'\nFINAL '%s'\n", conv_str, final_str);
+	printf("'%s'\n", final_str);
 
-	free(tmp);
-	return (conv_str);
+	free(conv_str);
+	return (final_str);
 }
 
 //TODO i
