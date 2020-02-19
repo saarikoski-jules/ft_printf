@@ -58,9 +58,12 @@ int main()
 	// printf("o: '%.20o'\n", 12);
 
 	// printf("%c, %d, %s, %x, %X, %p, %p\n", 'c', 12, str, 12, 12, str, str + 1);
+	int ret;
 
-	ft_printf("'This is a string %s with the length of %0-12.7d'\n", str, 6);
-	printf("'This is a string %s with the length of %0-12.7d'\n", str, 6);
+	ret = ft_printf("'This is a string %s with the length of %0-12.7d\nwith the ptr address of %p\nAlso, this is hex %X'\n", str, 6, str, 0x70);
+	ft_printf("RETURN VALUE %d\n", ret);
+	ret = printf("'This is a string %s with the length of %0-12.7d\nwith the ptr address of %p\nAlso, this is hex %X'\n", str, 6, str, 0x70);
+	printf("RETURN VALUE %d\n", ret);
 	// printf("aa\n");
 	free(str);
 	// while (1);

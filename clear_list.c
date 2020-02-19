@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/16 13:13:27 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/02/16 21:25:59 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/02/19 14:32:37 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,26 +22,11 @@ void clear_list(t_printf_arg **head)
 	while (tmp != NULL)
 	{
 		cur = tmp;
-		// printf("%d, %d\n", tmp->conv, cur->conv);
 		tmp = tmp->next;
 		if (cur->conv == s)
 			free(cur->arg.s);
 		free(cur);
 		cur = NULL;
 	}
-	// printf("head: %p, %p\n", head, *head);
 	*head = NULL;
-	// printf("head: %p, %p\n", head, *head);
-
-	// free(*head);
-	// t_printf_arg *tmp;
-
-	// tmp = *head;
-
-	// while (tmp->next != NULL)
-	// {
-	// 	printf("arg is %d\n", tmp->conv);
-
-	// 	tmp = tmp->next;
-	// }
 }

@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/16 15:27:26 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/02/16 21:43:27 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/02/19 14:32:45 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,7 @@ void add_conv(char **final, char *conv, t_printf_arg *arg)
 	if (arg->pad_type == p_left)
 		ft_memcpy(*final, conv, conv_len);
 	else
-	{
 		ft_memcpy(*final + final_len - conv_len, conv, conv_len);
-	}
 	if (arg->conv == p)
 	{
 		if (arg->pad_type == p_normal)

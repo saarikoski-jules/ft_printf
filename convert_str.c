@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/11 18:22:06 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/02/16 20:10:36 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/02/19 15:06:59 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 
 char *convert_str(t_printf_arg *arg)
 {
-	char *new = ft_strdup(arg->arg.s);//
+	char *new;
+	
+	new = ft_strdup(arg->arg.s);//
+	if (!new)
+		return (NULL);
 	return (new);
 }
