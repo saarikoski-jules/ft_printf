@@ -21,6 +21,11 @@ void			print_lst(t_printf_arg **head)
 			// printf("true???\n");
 			printf("addr: %p\nitem: %c\nfield width %zu\npad type: %u\n\n", tmp, tmp->arg.c, tmp->field_width, tmp->pad_type);
 		}
+		else if (tmp->conv == s)
+		{
+			// printf("true???\n");
+			printf("addr: %p\nitem: %s\nfield width %zu\npad type: %u\n\n", tmp, tmp->arg.s, tmp->field_width, tmp->pad_type);
+		}
 		else if (tmp->conv == d)
 		{
 			printf("addr: %p\nitem: %d\nfield width %zu\npad type: %u\nprecision: %zu\n\n", tmp, tmp->arg.d, tmp->field_width, tmp->pad_type, tmp->precision);
@@ -127,7 +132,7 @@ void	gen_arg_list(t_printf_arg **head, const char *str, va_list ap)
 	int				i;
 	t_printf_arg	*cur;
 	// char			item;
-	char			*convs = "cspdiuxX%";//
+	// char			*convs = "cspdiuxX%";//
 	char			*format_str;
 
 	i = 0;
@@ -138,11 +143,11 @@ void	gen_arg_list(t_printf_arg **head, const char *str, va_list ap)
 		if (str[i] == '%')
 		{
 			cur = gen_elem(head);
-			format_str = ft_strdupchr(str + i + 1, convs);//
+			format_str = ft_strdupchr(str + i + 1, "cspdiuxX%");//
 			//Instead of this, directly parse the information into a usable format in the struct.
 			// AKA pass the string and current arg to the parser.
 			manage_parser(&cur, format_str);
-			i += ft_strchrset(str + i + 1, convs);
+			i += ft_strchrset(str + i + 1, "cspdiuxX%");
 			// printf("%d, %c\n", i, str[i + 1]);
 			if (str[i + 1] == 'c')
 			{

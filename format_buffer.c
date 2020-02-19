@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/16 20:37:40 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/02/16 21:49:56 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/02/18 15:37:05 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,13 @@ char *apply_precision(t_printf_arg *arg, char *str)
 		prec = arg->precision;
 	new = (char *)ft_calloc(prec + 1, sizeof(char));//
 	ft_memset(new, '0', prec);
-	// printf("new: %s\n", new);
 	ft_memcpy(new + (prec - len), str, len);
 	return (new);
 }
 
 char *fill_buffer(t_printf_arg *arg, char *conv_str)
 {
-	char *new;
+	char	*new;
 	size_t	len;
 	char 	c;
 

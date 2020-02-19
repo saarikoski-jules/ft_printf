@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/11 11:25:10 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/02/16 21:40:58 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/02/19 12:40:16 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ func choose_converter(t_printf_arg *cur_arg)
 	{
 		return (convert_int);
 		// convert_int(cur_arg, str);
-	}
+	}	
 	else if (cur_arg->conv == s)
 		return (convert_str);
 	else if (cur_arg->conv == x)
@@ -79,7 +79,7 @@ char *execute_arg(t_printf_arg *arg)
 	//Separate function for appending strings the correct way
 
 	// printf("\nCONV: '%s'\nFINAL '%s'\n", conv_str, final_str);
-	printf("'%s'", final_str);//
+	// printf("'%s'", final_str);//
 
 	free(conv_str);
 	return (final_str);
@@ -87,6 +87,10 @@ char *execute_arg(t_printf_arg *arg)
 
 //TODO i
 //TODO u
+//TODO malloc protection
+//TODO error handling
+//TODO rewrite store args function
+//TODO norm
 
 
 // precision applies to:

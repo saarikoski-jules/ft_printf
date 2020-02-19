@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/05 15:02:01 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/02/10 16:35:44 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/02/19 11:56:50 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void error_state(char token, t_printf_arg **arg)
 {
-	printf("error\n");
+	// printf("error\n");
 	(void)token;
 	(void)(*arg);
 }
