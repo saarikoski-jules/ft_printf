@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   gen_args.c                                         :+:    :+:            */
+/*   gen_arg_list.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 14:05:00 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/02/19 15:01:06 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/02/19 21:55:41 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,18 @@ t_printf_arg	*gen_elem(t_printf_arg **head)
 	return(new);
 }
 
-int store_conv(char c, t_printf_arg **cur, va_list ap)
+int store_conv(char chr, t_printf_arg **cur, va_list ap)
 {
-	if (ft_strchr("uxX", c))
-		store_uint(c, cur, ap);
-	if (ft_strchr("cdi%", c))
-		store_int(c, cur, ap);
-	if (ft_strchr("sp", c))
+
+	if (ft_strchr("uxX", chr))
+		store_uint(chr, cur, ap);
+	else if (ft_strchr("di", chr))
+		store_int(chr, cur, ap);
+	else if (ft_strchr("c%", chr))
+		store_char(chr, cur, ap);
+	if (ft_strchr("sp", chr))
 	{
-		if (store_other(c, cur, ap) == -1)
+		if (store_other(chr, cur, ap) == -1)
 			return (-1);
 	}
 	return (1);
@@ -65,7 +68,7 @@ int	gen_arg_list(t_printf_arg **head, const char *str, va_list ap)
 			format_str = ft_strdupchr(str + i + 1, "cspdiuxX%");//
 			if (!format_str)
 				return (-1);
-			manage_parser(&cur, format_str);
+			manage_parser(&cur, format_str, ap);
 			free(format_str);
 			i += ft_strchrset(str + i + 1, "cspdiuxX%");
 			if (store_conv(str[i + 1], &cur, ap) == -1)//

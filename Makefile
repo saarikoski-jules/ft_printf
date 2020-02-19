@@ -6,7 +6,7 @@
 #    By: jsaariko <jsaariko@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/12/03 20:38:39 by jsaariko       #+#    #+#                 #
-#    Updated: 2020/02/19 17:34:16 by jsaariko      ########   odam.nl          #
+#    Updated: 2020/02/19 22:11:38 by jsaariko      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,13 +15,14 @@ LIBFT_DIR = libft/
 C_FILES	=	ft_printf.c \
 			gen_arg_str.c \
 			store_conv.c \
-			gen_args.c \
+			gen_arg_list.c \
 			parse.c \
 			transition_code.c \
 			base_state.c \
 			dash_state.c \
 			zero_state.c \
 			num_state.c \
+			ast_state.c \
 			precision_state.c \
 			error_state.c \
 			print_result.c \
@@ -83,10 +84,7 @@ LIBFT_C = $(LIBFT_DIR)ft_putchar_fd \
 
 LIBFT_FILES = $(LIBFT_C:%=%.o)
 O_FILES	=	$(C_FILES:%.c=%.o)
-# LIBFT_O	=	$(LIBFT_C:%=%.o)
 FLAGS	=	-Wall -Wextra -Werror
-
-# LIBFT 	=	-Ilibft -Llibft -lft
 
 all: $(NAME)
 
@@ -97,38 +95,33 @@ $(NAME): $(O_FILES) lib
 
 $(O_FILES):
 	@gcc $(FLAGS) -c $(C_FILES)
+	@echo "Printf object files compiled"
 
 lib:
-	make -C $(LIBFT_DIR) objects
+	@make -C $(LIBFT_DIR) objects
 
-test: $(NAME)
+test: fclean $(NAME)
 	@gcc -o test testmain.c libftprintf.a
 	@echo "Created test executable"
 
 clean:
 	@rm -f $(O_FILES)
 	@make -C $(LIBFT_DIR) clean
-	@echo "clean"
+	@echo "Cleared printf object files"
 
 clean_test:
-	@rm test
-	@rm lindsay_tests
+	@rm -f test
+	@rm -f lindsay_tests
+	@echo "Cleared test executables on printf"
 
 fclean: clean clean_test
 	@make -C $(LIBFT_DIR) fclean
-	@rm $(NAME)
+	@rm -f $(NAME)
+	@echo "Printf all clean!"
 
 lindsay: $(NAME)
 	gcc -o lindsay_tests libftprintf.a ../limartin_tests/main.c
-# all: main test
 
+re: fclean all
 
-
-# main:
-# 	gcc -o ft testmain.c ft_printf.c parse.c base_state.c num_state.c error_state.c dash_state.c zero_state.c precision_state.c transition_code.c print_result.c execute.c convert_char.c convert_int.c convert_hex.c convert_str.c convert_ptr.c clear_list.c gen_arg_str.c format_buffer.c store_conv.c gen_args.c -Ilibft -Llibft -lft
-
-# test:
-# 	gcc -o real test.c ft_itoa_base.c ft_numlen_base.c -Ilibft -Llibft -lft
-
-# lindsay:
-# 	gcc libftprintf.a ../limartin_tests/main.c
+	

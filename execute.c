@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/11 11:25:10 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/02/19 15:59:55 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/02/19 22:16:50 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ func choose_converter(t_printf_arg *cur_arg)
 	else if (cur_arg->conv == p)
 		return (convert_ptr);
 	return (NULL);
+
+	//it segfaults here??? on the second run?
 }
 
 char *execute_arg(t_printf_arg *arg)
@@ -41,7 +43,9 @@ char *execute_arg(t_printf_arg *arg)
 	char	*conv_str;
 	func	conv;
 
+	printf("segfault???\n");
 	conv = choose_converter(arg);//
+
 	if (!conv)
 		return (NULL);
 	conv_str = conv(arg);//

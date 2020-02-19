@@ -66,9 +66,16 @@ int main()
 	// printf("RETURN VALUE %d\n\n", ret);
 	// printf("aa\n");
 
-	// ft_printf(" (%d)\n", ft_printf("-04.8: |%-04.8s|", "0"));
-	ft_printf(" (%d)\n", ft_printf("*8.4: |%*.4s|", 8, "012345"));
 
+	// ft_printf(" (%d)\n", ft_printf("-04.8: |%-04.8s|", "0"));
+	// printf(" (%d)\n", ft_printf("*8.4: |%*.4s|", 8, "012345"));
+	// ft_printf(" (%d)\n", ft_printf("*8.4: |%*.4s|", 8, "012345"));
+
+	// printf("lol");
+	ft_printf("%%");
+	// printf("%%");
+
+	// printf("'%5.*.1d'", 12, 7);s
 
 	free(str);
 	// while (1);
