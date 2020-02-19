@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/14 13:02:19 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/02/19 14:57:03 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/02/19 16:18:51 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # include <stdio.h>//
 # include <unistd.h>//
 # include <stdarg.h>//
-# include "libft.h"
+# include "libft/libft.h"
 
 /*
 **	FINITE STATE MACHINE

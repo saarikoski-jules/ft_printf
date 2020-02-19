@@ -60,11 +60,16 @@ int main()
 	// printf("%c, %d, %s, %x, %X, %p, %p\n", 'c', 12, str, 12, 12, str, str + 1);
 	int ret;
 
-	ret = ft_printf("'This is a string %s with the length of %0-12.7d\nwith the ptr address of %p\nAlso, this is hex %X'\n", str, 6, str, 0x70);
-	ft_printf("RETURN VALUE %d\n", ret);
-	ret = printf("'This is a string %s with the length of %0-12.7d\nwith the ptr address of %p\nAlso, this is hex %X'\n", str, 6, str, 0x70);
-	printf("RETURN VALUE %d\n", ret);
+	// ret = ft_printf("'FT_PRINTF:\nThis is a string %s with the length of %0-12.7d\nwith the ptr address of %p\nAlso, this is hex %X\ni = %i\nproper u = %u\nbad u = %u'\n", str, 6, str, 0x70, 12, 12, -12);
+	// ft_printf("RETURN VALUE %d\n\n", ret);
+	// ret = printf("REAL PRINTF:\n'This is a string %s with the length of %0-12.7d\nwith the ptr address of %p\nAlso, this is hex %X\ni = %i\nproper u = %u\nbad u = %u'\n", str, 6, str, 0x70, 12, 12, -12);
+	// printf("RETURN VALUE %d\n\n", ret);
 	// printf("aa\n");
+
+	// ft_printf(" (%d)\n", ft_printf("-04.8: |%-04.8s|", "0"));
+	ft_printf(" (%d)\n", ft_printf("*8.4: |%*.4s|", 8, "012345"));
+
+
 	free(str);
 	// while (1);
 	// ft_printf("str %12c, %000-s, %c, %c, %d, %d, %X, %p, %x %u %%", 'c', "I'm a string", '9', '2', 7, 12, 12, &c, 12, i);

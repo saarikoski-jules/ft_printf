@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/11 11:25:10 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/02/19 15:52:26 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/02/19 15:59:55 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ char *execute_arg(t_printf_arg *arg)
 
 //TODO i
 //TODO u
+//TODO *
 //TODO malloc protection
 //TODO error handling
 //TODO norm
