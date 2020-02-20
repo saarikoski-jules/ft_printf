@@ -6,7 +6,7 @@
 #    By: jsaariko <jsaariko@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/12/03 20:38:39 by jsaariko       #+#    #+#                 #
-#    Updated: 2020/02/19 22:11:38 by jsaariko      ########   odam.nl          #
+#    Updated: 2020/02/20 15:46:04 by jsaariko      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,7 +80,8 @@ LIBFT_C = $(LIBFT_DIR)ft_putchar_fd \
 				$(LIBFT_DIR)ft_lltoa_base \
 				$(LIBFT_DIR)ft_ulltoa_base \
 				$(LIBFT_DIR)ft_toupperstr \
-				$(LIBFT_DIR)ft_tolowerstr
+				$(LIBFT_DIR)ft_tolowerstr \
+				$(LIBFT_DIR)ft_strjoinindex
 
 LIBFT_FILES = $(LIBFT_C:%=%.o)
 O_FILES	=	$(C_FILES:%.c=%.o)
@@ -88,13 +89,15 @@ FLAGS	=	-Wall -Wextra -Werror
 
 all: $(NAME)
 
+#remember to compile with flags
+
 $(NAME): $(O_FILES) lib
 	@ar -rc $(NAME) $(O_FILES) $(LIBFT_FILES)
 	@ranlib $(NAME)
 	@echo "libftprintf.a compiled"
 
 $(O_FILES):
-	@gcc $(FLAGS) -c $(C_FILES)
+	@gcc -c $(C_FILES)
 	@echo "Printf object files compiled"
 
 lib:

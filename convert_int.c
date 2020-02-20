@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/11 16:25:42 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/02/19 17:49:43 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/02/20 09:59:50 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char *convert_int(t_printf_arg *arg)
 	char *tmp;
 	char *final;
 
+
+	// printf("\n\nIN CONVERT_INT %lld\n", arg->arg.i);
 	tmp = ft_lltoa_base(arg->arg.i, 10);//
 	if (!tmp)
 		return (NULL);

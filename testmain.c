@@ -72,8 +72,21 @@ int main()
 	// ft_printf(" (%d)\n", ft_printf("*8.4: |%*.4s|", 8, "012345"));
 
 	// printf("lol");
-	ft_printf("%%");
+	// ft_printf("%%");
 	// printf("%%");
+
+// FIX THIS!!!!!:
+
+	// printf("printf: Text1\nText2\nTest4%CTest5\n", 0x0381);
+	// ft_printf("ft_printf: Text1\nText2\nTest4%CTest5\n", 0x0381);
+//!!!!!!!!
+
+	// ft_printf("this is a number '%0-12d'\n", 7);
+	printf(" (%d)\n", printf("*(-03): |%*i|", -03, 42));
+	ft_printf(" (%d)\n", ft_printf("*(-03): |%*i|", -03, 42));
+
+	// printf("Text1\nText2\n%sTest4%CTest5\n", "Text3\n", 0x0381);
+
 
 	// printf("'%5.*.1d'", 12, 7);s
 

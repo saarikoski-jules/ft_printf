@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/05 15:01:38 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/02/19 21:13:11 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/02/20 16:33:55 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void num_state(char token, t_printf_arg **arg, va_list ap)
 {
 	(*arg)->field_width = (token - 48);
 	(void)ap;
-	// printf("current token: %c, arg: %zu\n", token, (*arg)->field_width);
+	// printf("current token: %c, arg: %zu\n", token, (*arg)->field_width;
 }
 
 void num_repeat_state(char token, t_printf_arg **arg, va_list ap)

@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 14:05:00 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/02/19 21:55:41 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/02/20 18:26:28 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_printf_arg	*gen_elem(t_printf_arg **head)
 	new->next = NULL;
 	new->pad_type = p_normal;
 	new->field_width = 0;
-	new->precision = 0;
+	new->precision = 1;
 	if (*head == NULL)
 		*head = new;
 	else
@@ -69,6 +69,7 @@ int	gen_arg_list(t_printf_arg **head, const char *str, va_list ap)
 			if (!format_str)
 				return (-1);
 			manage_parser(&cur, format_str, ap);
+			// printf("\n\nPRECISION %zu\n\n", cur->precision);
 			free(format_str);
 			i += ft_strchrset(str + i + 1, "cspdiuxX%");
 			if (store_conv(str[i + 1], &cur, ap) == -1)//

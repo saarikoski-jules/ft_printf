@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/09 22:29:40 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/02/19 21:13:26 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/02/20 16:34:07 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,4 +18,6 @@ void prec_state(char token, t_printf_arg **arg, va_list ap)
 	(void)token;
 	(void)ap;
 	(*arg)->precision = 0;
+	if ((*arg)->pad_type == p_zero)
+		(*arg)->pad_type = p_normal;
 }

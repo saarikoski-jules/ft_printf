@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/13 17:22:11 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/02/19 15:06:27 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/02/20 19:15:48 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char *convert_ptr(t_printf_arg *arg)
 	char *tmp;
 	char *final;
 
+	// if (arg->arg.i == 0)
+		// printf("\n\nI AM THIS: %x\nWITH PRECISION: %d\n\n", arg->arg.p, arg->precision);
 	tmp = ft_ulltoa_base((long long)arg->arg.p, 16);//
 	if (!tmp)
 		return (NULL);
@@ -26,6 +28,7 @@ char *convert_ptr(t_printf_arg *arg)
 	if (!final)
 		return (NULL);
 	tmp = apply_precision(arg, final);
+	// printf("\n\nTMP '%s'\n\n", tmp + 1);
 	free(final);
 	if (!tmp)
 		return (NULL);

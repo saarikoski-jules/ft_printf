@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/11 12:05:50 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/02/19 22:14:32 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/02/20 09:32:28 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int manage_print(const char *str, t_printf_arg **head)
 		{
 			ret += print_item(str + len, i - len);
 			len = i + 2 + ft_strchrset(str + i + 1, "cspdiuxX%"); //plus the conversion etc
+			// printf("%d\n", len);
 			if (str[i] == '%')
 			{			
 				// printf("str[i] = '%c, i = %d'\n", str[i], i);
@@ -55,6 +56,8 @@ int manage_print(const char *str, t_printf_arg **head)
 			}
 			if (str[i] == '\0')
 				return (ret);
+			if (i + 1 != '\0') //double check the necessity/logic here
+				i++;
 		}
 		i++;
 	}

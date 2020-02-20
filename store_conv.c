@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 14:04:08 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/02/19 22:04:58 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/02/20 10:21:19 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,18 @@ void store_uint(char chr, t_printf_arg **cur, va_list ap)
 		(*cur)->conv = X;
 	else if (chr == 'x')
 		(*cur)->conv = x;
+	// (*cur)->precision = 1;
 }
 
 void store_int(char chr, t_printf_arg **cur, va_list ap)
 {
-	(*cur)->arg.i = va_arg(ap, long long);
+	(*cur)->arg.i = va_arg(ap, int);
+	// printf("\n\nIN STORE INT %lld\n", (*cur)->arg.i);
 	if (chr == 'd')
 		(*cur)->conv = d;
 	else if (chr == 'i')
 		(*cur)->conv = i;
+	// (*cur)->precision = 1;
 }
 
 void store_char(char chr, t_printf_arg **cur, va_list ap)
@@ -59,3 +62,5 @@ int store_other(char chr, t_printf_arg **cur, va_list ap)
 	}
 	return (1);
 }
+
+//precision for floats is automatically 6

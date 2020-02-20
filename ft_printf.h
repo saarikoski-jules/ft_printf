@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/14 13:02:19 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/02/19 21:15:01 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/02/20 18:01:17 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ typedef	enum	e_transition_code
 **	STATES
 */
 
+
+
 void entry_state(char token, t_printf_arg **arg, va_list ap);
 void dash_state(char token, t_printf_arg **arg, va_list ap);
 void zero_state(char token, t_printf_arg **arg, va_list ap);
@@ -101,6 +103,8 @@ void ast_state(char token, t_printf_arg **arg, va_list ap);
 void prec_ast_state(char token, t_printf_arg **arg, va_list ap);
 void error_state(char token, t_printf_arg **arg, va_list ap);
 void exit_state(char token, t_printf_arg **arg, va_list ap);
+
+// typedef void (*state_ptr)(char, t_printf_arg **, va_list);
 
 t_transition_code get_transition_code(char token);
 
@@ -170,7 +174,7 @@ static t_transition_obj const transition_table[] =
 	{prec_ast_state, t_exit, exit_state},
 
 	{prec_state, t_dash, dash_state},
-	{prec_state, t_zero, zero_state},
+	{prec_state, t_zero, prec_num_state},
 	{prec_state, t_num, prec_num_state},
 	{prec_state, t_ast, prec_ast_state},
 	{prec_state, t_dot, prec_state}, //undefined behavior
