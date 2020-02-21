@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/11 11:25:10 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/02/20 19:16:03 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/02/21 23:34:05 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ func choose_converter(t_printf_arg *cur_arg)
 	else if (cur_arg->conv == u)
 		return (convert_uint);//
 	else if (cur_arg->conv == i)
-		return (convert_iint);//
+		return (convert_int);//
 	else if (cur_arg->conv == s)
 		return (convert_str);
 	else if (cur_arg->conv == x)
@@ -53,11 +53,11 @@ char *execute_arg(t_printf_arg *arg)
 	conv_str = conv(arg);//
 	// printf("\n\nconv_str: '%s'\n", conv_str);
 	// conv_str = NULL;
+	// printf("\n\nCONV_STR '%s'\n\n", conv_str);
 	if (!conv_str)
 		return (NULL);
-	// printf("\n\nCONV_STR '%s'\n\n", conv_str);
 	final_str = fill_buffer(arg, conv_str);//
-	printf("\n\nFINAL_STR '%s'\n\n", final_str + 2);
+	// printf("\n\nFINAL_STR '%s'\n\n", final_str);
 	// printf("final_str: '%s'\n\n", final_str);
 	// printf("segfault???\n");
 	if (!final_str)

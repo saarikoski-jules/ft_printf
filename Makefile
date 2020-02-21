@@ -6,7 +6,7 @@
 #    By: jsaariko <jsaariko@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/12/03 20:38:39 by jsaariko       #+#    #+#                 #
-#    Updated: 2020/02/20 15:46:04 by jsaariko      ########   odam.nl          #
+#    Updated: 2020/02/21 20:20:54 by jsaariko      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -91,8 +91,8 @@ all: $(NAME)
 
 #remember to compile with flags
 
-$(NAME): $(O_FILES) lib
-	@ar -rc $(NAME) $(O_FILES) $(LIBFT_FILES)
+$(NAME): lib $(O_FILES)
+	@ar -rc $(NAME) $(LIBFT_FILES) $(O_FILES)
 	@ranlib $(NAME)
 	@echo "libftprintf.a compiled"
 

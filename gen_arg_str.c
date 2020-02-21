@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/16 15:27:26 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/02/19 14:32:45 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/02/21 23:34:21 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,12 @@ void add_conv(char **final, char *conv, t_printf_arg *arg)
 
 	final_len = ft_strlen(*final);
 	conv_len = ft_strlen(conv);
+	// printf("\n\nADD_CONV:\nfinal '%s', conv '%s'\n\n", *final, conv);
 	if (arg->pad_type == p_left)
 		ft_memcpy(*final, conv, conv_len);
 	else
 		ft_memcpy(*final + final_len - conv_len, conv, conv_len);
+	// printf("\n\nADD_CONV:\nfinal '%s', conv '%s'\n\n", *final, conv);
 	if (arg->conv == p)
 	{
 		if (arg->pad_type == p_normal)

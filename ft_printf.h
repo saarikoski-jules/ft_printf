@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/14 13:02:19 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/02/20 18:01:17 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/02/21 22:40:44 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,7 +218,7 @@ int	gen_arg_list(t_printf_arg **head, const char *str, va_list ap);
 char				*convert_char(t_printf_arg *arg);
 char				*convert_int(t_printf_arg *arg);
 char				*convert_uint(t_printf_arg *arg);
-char				*convert_iint(t_printf_arg *arg);
+// char				*convert_iint(t_printf_arg *arg);
 char				*convert_str(t_printf_arg *arg);
 char				*convert_hex_lc(t_printf_arg *arg);
 char *convert_hex_uc(t_printf_arg *arg);
@@ -229,7 +229,7 @@ void clear_list(t_printf_arg **head);
 char *fill_buffer(t_printf_arg *arg, char *conv_str);
 void cpy_from(char **final, char *conv, int index);
 void add_conv(char **final, char *conv, t_printf_arg *arg);
-char *apply_precision(t_printf_arg *arg, char *str);
+char *apply_precision(t_printf_arg *arg);
 void store_int(char c, t_printf_arg **cur, va_list ap);
 void store_uint(char c, t_printf_arg **cur, va_list ap);
 void store_char(char c, t_printf_arg **cur, va_list ap);
