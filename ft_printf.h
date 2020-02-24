@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/14 13:02:19 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/02/21 22:40:44 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/02/24 18:15:19 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ typedef struct	s_printf_arg
 	t_type					arg;
 	t_padding				pad_type;
 	size_t					field_width;
-	size_t					precision;
+	ssize_t					precision;
 	struct s_printf_arg		*next;
 }				t_printf_arg;
 

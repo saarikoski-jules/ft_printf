@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 14:04:08 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/02/20 10:21:19 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/02/24 20:24:42 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void store_uint(char chr, t_printf_arg **cur, va_list ap)
 {
-	(*cur)->arg.u = va_arg(ap, unsigned long long);
+	(*cur)->arg.u = va_arg(ap, unsigned int);
 	if (chr == 'u')
 		(*cur)->conv = u;
 	else if (chr == 'X')
@@ -41,9 +41,9 @@ void store_char(char chr, t_printf_arg **cur, va_list ap)
 	if (chr == '%')
 		(*cur)->arg.c = '%';
 	else
-		(*cur)->arg.c = (char)va_arg(ap, int);
+		(*cur)->arg.c = va_arg(ap, int);
 
-	// printf("%c, %d\n", (*cur)->arg.c, (*cur)->conv);
+	// printf("'%d'\n", (*cur)->arg.c);
 }
 
 int store_other(char chr, t_printf_arg **cur, va_list ap)

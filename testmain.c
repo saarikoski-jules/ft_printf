@@ -83,13 +83,17 @@ int main()
 
 
 	// ft_printf("this is a number '%0-12d'\n", 7);
-	printf(" (%d)\n", printf("*(-03): |%*i|", -03, 42));
-	ft_printf(" (%d)\n", ft_printf("*(-03): |%*i|", -03, 42));
+	// printf(" (%d)\n", printf("*(-03): |%*i|", -03, 42));
+	// ft_printf(" (%d)\n", ft_printf("*(-03): |%*i|", -03, 42));
 
 	// printf("Text1\nText2\n%sTest4%CTest5\n", "Text3\n", 0x0381);
 
 
 	// printf("'%5.*.1d'", 12, 7);s
+
+
+	// printf("%d\n", 0);
+	ft_printf("%d\n", 0);
 
 	free(str);
 	// while (1);

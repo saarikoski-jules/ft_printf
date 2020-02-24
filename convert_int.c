@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/11 16:25:42 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/02/21 23:33:37 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/02/24 16:04:55 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ char *convert_int(t_printf_arg *arg)
 	char *num;
 	char *final;
 
+	// printf("\n\nIN CONVERT INT: %u\n\n", arg->arg.u);
 	prec_buffer = apply_precision(arg);//
 	if (!prec_buffer)
 		return (NULL);
@@ -32,7 +33,8 @@ char *convert_int(t_printf_arg *arg)
 		return (NULL);
 	}
 	//lets hope this monster works
-	ft_memcpy(prec_buffer + ft_strlen(prec_buffer) - ft_strlen(num), num, ft_strlen(num));
+	// printf("\n\nprec buf len: %d\nnum strlen: %d\n, num: %s\n\n", ft_strlen(prec_buffer), ft_strlen(num), num);
+	ft_memcpy(prec_buffer + ft_strlen(prec_buffer) - ft_strlen(num), num, ft_strlen(num)); //THIS MONSTER DOESN'T WORK. FIX.
 	// printf("\n\nprec_buffer: '%s', num '%s', ft_strlen: %d\n\n", prec_buffer, num, ft_strlen(num));
 	// final = ft_strjoin(prec_buffer, num);
 	// free(prec_buffer);
@@ -48,7 +50,10 @@ char *convert_uint(t_printf_arg *arg)
 	char *num;
 	char *final;
 
+	// printf("\n\nIN CONVERT UINT: %u\n\n", arg->arg.u);
 	prec_buffer = apply_precision(arg);//
+	// printf("\napply prec: '%s'\n", prec_buffer);
+
 	if (!prec_buffer)
 		return (NULL);
 	if (arg->arg.u == 0 && arg->precision == 0)
@@ -66,6 +71,7 @@ char *convert_uint(t_printf_arg *arg)
 	free(num);
 	// if (!final)
 		// return (NULL);
+		// printf("\nprec buf: %s\n", prec_buffer);
 	return (prec_buffer);
 }
 

@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 21:14:00 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/02/20 18:26:43 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/02/24 14:25:36 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 void ast_state(char token, t_printf_arg **arg, va_list ap)
 {
 	int ast;
+
+	// printf("ast_state\n");
 
 	// tmp = ft_lltoa_base(va_arg(ap, int), 10);//
 	// manage_parser(arg, tmp, ap);
@@ -37,18 +39,25 @@ void prec_ast_state(char token, t_printf_arg **arg, va_list ap)
 
 	int ast;
 
+	// printf("prec_ast_state\n");
+
 	// tmp = ft_lltoa_base(va_arg(ap, int), 10);//
 	// manage_parser(arg, tmp, ap);
 	ast = va_arg(ap, int);
 	// printf("\nwildcard value: %d\n", ast);
 
-	if (ast < 0)
+	if (ast >= -1)
 	{
-		(*arg)->pad_type = p_left;
-		(*arg)->precision = 1;
+		(*arg)->precision = ast;
+		// (*arg)->pad_type = p_left;
+		// (*arg)->precision = 1;
 	}
 	else
-		(*arg)->precision = ast;
+	{
+		(*arg)->precision = -1;
+	}
+	
+	// else
 
 	// if (ast < 0)
 	// 	(*arg)->pad_type = p_left;

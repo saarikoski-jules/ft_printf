@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/11 11:25:10 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/02/21 23:34:05 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/02/24 16:03:36 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,45 @@ func choose_converter(t_printf_arg *cur_arg)
 {
 	if (cur_arg->conv == c)
 	{
+		// printf("c\n");
 		// printf("conversion type %d\n", cur_arg->conv);
 		return (convert_char);
 	}
 	else if (cur_arg->conv == d)
+	{
+		// printf("d\n");
 		return (convert_int);
+	}
 	else if (cur_arg->conv == u)
+	{
+		// printf("u\n");
 		return (convert_uint);//
+	}
 	else if (cur_arg->conv == i)
+	{
+		// printf("i\n");
 		return (convert_int);//
+	}
 	else if (cur_arg->conv == s)
+	{
+		// printf("s\n");
 		return (convert_str);
+	}
 	else if (cur_arg->conv == x)
+	{
+		// printf("x\n");
 		return (convert_hex_lc);
+	}
 	else if (cur_arg->conv == X)
+	{
+		// printf("X\n");
 		return (convert_hex_uc);
+	}
 	else if (cur_arg->conv == p)
+	{
+		// printf("p\n");
 		return (convert_ptr);
+	}
 	return (NULL);
 
 	//it segfaults here??? on the second run?
@@ -51,6 +73,7 @@ char *execute_arg(t_printf_arg *arg)
 	if (!conv)
 		return (NULL);
 	conv_str = conv(arg);//
+	// printf("\n\nBEFORE ADD_CONV: %s\n\n", conv_str);
 	// printf("\n\nconv_str: '%s'\n", conv_str);
 	// conv_str = NULL;
 	// printf("\n\nCONV_STR '%s'\n\n", conv_str);

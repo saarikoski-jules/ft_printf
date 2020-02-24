@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/16 20:37:40 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/02/21 23:51:52 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/02/24 21:13:23 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ char *apply_precision(t_printf_arg *arg)
 	char *new;
 	int base;
 
+	// printf("uint is: %d", arg->arg.u);
 	if (arg->conv == p || arg->conv == x || arg->conv == X)
 		base = 16;
 	else
@@ -95,19 +96,27 @@ char *apply_precision(t_printf_arg *arg)
 	// printf("\n\nbase: %d\n\n", base);
 	if (arg->arg.i == 0 && arg->precision == 0)
 		prec = 0;
+	else if (arg->arg.i == 0 && arg->precision == -1)
+		prec = 1;
 	else
 		prec = (ft_numlen_base(arg->arg.i, base) > arg->precision) ? ft_numlen_base(arg->arg.i, base) : arg->precision;
-	// printf("\n\nnumlen: %d\nnum: %llx\n\n", ft_numlen_base(arg->arg.i, 16), arg->arg.i);
+	// printf("uint is: %ld", arg->arg.i);
+	// printf("uint is: %llx", (long long)arg->arg.i);
+
+	// printf("\n\nnumlen: %d\nnum: %llx\n\n", ft_numlen_base(arg->arg.i, base), arg->arg.i);
+	// printf("\n\nnumlen: %d\nnum: %llx\n\n", ft_numlen_base(arg->arg.u, base), arg->arg.u);
 
 	//check which value gets passed into numlen base
 
 
 	//Use base instead so you can also work with hex
 	// printf("\n\nPREC: %d\n\n", prec);//
+	// printf("\n\nprec: %d, precision: %d, numlen arg: %d\n\n", prec, arg->precision, ft_numlen_base(arg->arg.i, base));
 	new = (char *)ft_calloc(prec + 1, sizeof(char));
 	if (!new)
 		return (NULL);
 	ft_memset(new, '0', prec);
+	// printf("\n\nnew: %s\n\n", new);
 	return (new);
 }
 
@@ -115,7 +124,7 @@ char *fill_buffer(t_printf_arg *arg, char *conv_str)
 {
 	char	*new;
 	size_t	len;
-	char 	c;
+	char 	padding;
 
 	new = NULL;
 	len = ft_strlen(conv_str);
@@ -123,8 +132,12 @@ char *fill_buffer(t_printf_arg *arg, char *conv_str)
 	// printf("padding type %d\n", arg->pad_type);
 	// printf("precision %d\n", arg->precision);
 	// printf("field width %d\n", arg->field_width);
-	c = (arg->pad_type == p_zero) ? '0' : ' ';//
-	// printf("c '%c'\n", c);
+	padding = (arg->pad_type == p_zero) ? '0' : ' ';//
+	// printf("\n\npad type before: '%c'\n\n", padding);
+
+	if ((arg->conv != s && arg->conv != c) && arg->precision != -1)
+		padding = ' ';
+	// printf("\n\npad type: '%c'\n\n", padding);
 
 	// printf("padding with '%c'\n", c);
 	arg->field_width = (arg->field_width > len) ? arg->field_width : len;//
@@ -134,7 +147,11 @@ char *fill_buffer(t_printf_arg *arg, char *conv_str)
 	if (!new)
 		return (NULL);
 	// printf("new before memset: '%s'\n", new + 2);
-	ft_memset(new, c, arg->field_width);
+	// printf("\n\nwidth: '%d', char '%c', new: '%s'\n", arg->field_width, padding, new);
+	ft_memset(new, padding, arg->field_width);
+	// printf("'%s'\n\n", new);
 	// printf("new: '%s'\n", new + 2);
 	return (new);
 }
+
+//TODO Rework so that I can pass argument length into the write function in case of zero chars

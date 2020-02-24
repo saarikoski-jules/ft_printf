@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/13 16:29:44 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/02/21 23:55:15 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/02/24 16:00:39 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ char *convert_hex_lc(t_printf_arg *arg)
 	char *num;
 	char *final;
 
+	// printf("\n\nIN HEX LC %d\n", arg->arg.u);
+	// printf("IN HEX LC %x\n\n", arg->arg.u);
 	prec_buffer = apply_precision(arg);//
 	if (!prec_buffer)
 		return (NULL);
@@ -82,6 +84,8 @@ char *convert_hex_uc(t_printf_arg *arg)
 	char *num;
 	char *final;
 
+	// printf("\n\nIN HEX UC %d\n", arg->arg.u);
+	// printf("IN HEX UC %X\n\n", arg->arg.u);
 	prec_buffer = apply_precision(arg);//
 	if (!prec_buffer)
 		return (NULL);

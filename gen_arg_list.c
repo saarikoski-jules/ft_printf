@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 14:05:00 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/02/20 18:26:28 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/02/24 18:15:05 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_printf_arg	*gen_elem(t_printf_arg **head)
 	new->next = NULL;
 	new->pad_type = p_normal;
 	new->field_width = 0;
-	new->precision = 1;
+	new->precision = -1;
 	if (*head == NULL)
 		*head = new;
 	else
