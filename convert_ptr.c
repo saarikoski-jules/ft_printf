@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/13 17:22:11 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/02/21 23:48:49 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/02/25 12:00:58 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
 // 	return (tmp);
 // }
 
-char *convert_ptr(t_printf_arg *arg)
+char *convert_ptr(t_printf_arg **arg)
 {
 	char *prec_buffer;
 	char *num;
@@ -50,10 +50,10 @@ char *convert_ptr(t_printf_arg *arg)
 	prec_buffer = apply_precision(arg);//
 	if (!prec_buffer)
 		return (NULL);
-	if (arg->arg.p == 0 && arg->precision == 0)
+	if ((*arg)->arg.p == 0 && (*arg)->precision == 0)
 		num = ft_strdup("");
 	else
-		num = ft_ulltoa_base((long long)arg->arg.p, 16);//
+		num = ft_ulltoa_base((long long)(*arg)->arg.p, 16);//
 	if (!num)
 	{
 		free(prec_buffer);
@@ -66,7 +66,10 @@ char *convert_ptr(t_printf_arg *arg)
 	// if (!buf)
 		// return (NULL);
 	final = ft_strjoin("0x", prec_buffer);
-	ft_memcpy(prec_buffer, "0x", 2);
+	// printf("\n\n'%s', len: %d, strlen: %d\n", final, (*arg)->arg_width, ft_strlen(final));
+	(*arg)->arg_width += 2;
+	// printf("'%s', len: %d, strlen: %d\n\n", final, (*arg)->arg_width, ft_strlen(final));
+	// ft_memcpy(prec_buffer, "0x", 2);
 	free(prec_buffer);
 	if (!final)
 		return (NULL);

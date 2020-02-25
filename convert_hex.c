@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/13 16:29:44 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/02/24 16:00:39 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/02/25 14:40:55 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 // 	char *tmp;
 // 	char *final;
 
-// 	tmp = ft_lltoa_base(arg->arg.u, 16);//
+// 	tmp = ft_lltoa_base((*arg)->arg.u, 16);//
 // 	if (!tmp)
 // 		return (NULL);
 // 	ft_tolowerstr(&tmp);
@@ -29,21 +29,21 @@
 // 	return (final);
 // }
 
-char *convert_hex_lc(t_printf_arg *arg)
+char *convert_hex_lc(t_printf_arg **arg)
 {
 	char *prec_buffer;
 	char *num;
 	char *final;
 
-	// printf("\n\nIN HEX LC %d\n", arg->arg.u);
-	// printf("IN HEX LC %x\n\n", arg->arg.u);
+	// printf("\n\nIN HEX LC %d\n", (*arg)->arg.u);
+	// printf("IN HEX LC %x\n\n", (*arg)->arg.u);
 	prec_buffer = apply_precision(arg);//
 	if (!prec_buffer)
 		return (NULL);
-	if (arg->arg.u == 0 && arg->precision == 0)
+	if ((*arg)->arg.u == 0 && (*arg)->precision == 0)
 		num = ft_strdup("");
 	else
-		num = ft_lltoa_base((long long)arg->arg.u, 16);//
+		num = ft_lltoa_base((long long)(*arg)->arg.u, 16);//
 	if (!num)
 	{
 		free(prec_buffer);
@@ -64,7 +64,7 @@ char *convert_hex_lc(t_printf_arg *arg)
 // 	char *tmp;
 // 	char *final;
 	
-// 	tmp = ft_lltoa_base(arg->arg.u, 16);//
+// 	tmp = ft_lltoa_base((*arg)->arg.u, 16);//
 // 	if (!tmp)
 // 		return (NULL);
 // 	// final = apply_precision(arg, tmp);//
@@ -76,23 +76,24 @@ char *convert_hex_lc(t_printf_arg *arg)
 // }
 
 // TODO Check which type hexadecimals are stored as
+// TODO Check how to handle negative hex
 
 
-char *convert_hex_uc(t_printf_arg *arg)
+char *convert_hex_uc(t_printf_arg **arg)
 {
 	char *prec_buffer;
 	char *num;
 	char *final;
 
-	// printf("\n\nIN HEX UC %d\n", arg->arg.u);
-	// printf("IN HEX UC %X\n\n", arg->arg.u);
+	// printf("\n\nIN HEX UC %d\n", (*arg)->arg.u);
+	// printf("IN HEX UC %X\n\n", (*arg)->arg.u);
 	prec_buffer = apply_precision(arg);//
 	if (!prec_buffer)
 		return (NULL);
-	if (arg->arg.u == 0 && arg->precision == 0)
+	if ((*arg)->arg.u == 0 && (*arg)->precision == 0)
 		num = ft_strdup("");
 	else
-		num = ft_lltoa_base((long long)arg->arg.u, 16);//
+		num = ft_lltoa_base((long long)(*arg)->arg.u, 16);//
 	if (!num)
 	{
 		free(prec_buffer);
@@ -116,10 +117,10 @@ char *convert_hex_uc(t_printf_arg *arg)
 // 	prec_buffer = apply_precision(arg);//
 // 	if (!prec_buffer)
 // 		return (NULL);
-// 	if (arg->arg.u == 0 && arg->precision == 0)
+// 	if ((*arg)->arg.u == 0 && (*arg)->precision == 0)
 // 		num = ft_strdup("");
 // 	else
-// 		num = ft_lltoa_base((long long)arg->arg.i, 16);//
+// 		num = ft_lltoa_base((long long)(*arg)->arg.i, 16);//
 // 	if (!num)
 // 	{
 // 		free(prec_buffer);
