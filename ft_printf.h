@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/14 13:02:19 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/02/24 18:15:19 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/02/25 17:07:39 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct	s_printf_arg
 	t_type					arg;
 	t_padding				pad_type;
 	size_t					field_width;
+	size_t					arg_width;
 	ssize_t					precision;
 	struct s_printf_arg		*next;
 }				t_printf_arg;
@@ -211,28 +212,29 @@ int					ft_printf(const char *str, ...);
 void				manage_parser(t_printf_arg **arg, char *tokens, va_list ap);
 t_transition_code	get_transition(char token);
 int					manage_print(const char *str, t_printf_arg **head);
-char				*execute_arg(t_printf_arg *cur_arg);
+char				*execute_arg(t_printf_arg **cur_arg);
 int	gen_arg_list(t_printf_arg **head, const char *str, va_list ap);
 
 
-char				*convert_char(t_printf_arg *arg);
-char				*convert_int(t_printf_arg *arg);
-char				*convert_uint(t_printf_arg *arg);
+char				*convert_char(t_printf_arg **arg);
+char				*convert_int(t_printf_arg **arg);
+char				*convert_uint(t_printf_arg **arg);
 // char				*convert_iint(t_printf_arg *arg);
-char				*convert_str(t_printf_arg *arg);
-char				*convert_hex_lc(t_printf_arg *arg);
-char *convert_hex_uc(t_printf_arg *arg);
-char *convert_ptr(t_printf_arg *arg);
+char				*convert_str(t_printf_arg **arg);
+char				*convert_hex_lc(t_printf_arg **arg);
+char *convert_hex_uc(t_printf_arg **arg);
+char *convert_ptr(t_printf_arg **arg);
 
 
 void clear_list(t_printf_arg **head);
-char *fill_buffer(t_printf_arg *arg, char *conv_str);
+char *fill_buffer(t_printf_arg **arg, char *conv_str);
 void cpy_from(char **final, char *conv, int index);
-void add_conv(char **final, char *conv, t_printf_arg *arg);
-char *apply_precision(t_printf_arg *arg);
+void add_conv(char **final, char *conv, t_printf_arg **arg);
+char *apply_precision(t_printf_arg **arg);
 void store_int(char c, t_printf_arg **cur, va_list ap);
 void store_uint(char c, t_printf_arg **cur, va_list ap);
 void store_char(char c, t_printf_arg **cur, va_list ap);
 int store_other(char c, t_printf_arg **cur, va_list ap);
 
 #endif
+

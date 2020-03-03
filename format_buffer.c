@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/16 20:37:40 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/03/03 13:31:48 by jsaariko      ########   odam.nl         */
+/*   Created: 2020/03/03 14:52:06 by jsaariko       #+#    #+#                */
+/*   Updated: 2020/03/03 14:52:39 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,38 +82,76 @@
 //fill buffer with as many zeroes as thee actual precision is
 //run apply precision before memcpying the actual numstr over
 
-char *apply_precision(t_printf_arg *arg)
+char *apply_precision(t_printf_arg **arg)
 {
 	int prec;
 	char *new;
 	int base;
 
 	// printf("uint is: %d", arg->arg.u);
-	if (arg->conv == p || arg->conv == x || arg->conv == X)
+	if ((*arg)->conv == p || (*arg)->conv == x || (*arg)->conv == X)
 		base = 16;
 	else
 		base = 10; //get accurate base
 	// printf("\n\nbase: %d\n\n", base);
-	if (arg->arg.i == 0 && arg->precision == 0)
+	if ((*arg)->arg.i == 0 && (*arg)->precision == 0)
 		prec = 0;
-	else if (arg->arg.i == 0 && arg->precision == -1)
+	else if ((*arg)->arg.i == 0 && (*arg)->precision == -1)
 		prec = 1;
 	else
-		prec = (ft_numlen_base(arg->arg.i, base) > arg->precision) ? ft_numlen_base(arg->arg.i, base) : arg->precision;
-	if (arg->arg.i < 0)
+// <<<<<<< HEAD
+		prec = (ft_numlen_base((*arg)->arg.i, base) > (*arg)->precision) ? ft_numlen_base((*arg)->arg.i, base) : (*arg)->precision;
+	if ((*arg)->arg.i < 0)
 		prec++;
 	// printf("uint is: %ld", arg->arg.i);
 	// printf("uint is: %llx", (long long)arg->arg.i);
 
 	// printf("\n\nnumlen: %d\nnum: %llx\n\n", ft_numlen_base(arg->arg.i, base), arg->arg.i);
 	// printf("\n\nnumlen: %d\nnum: %llx\n\n", ft_numlen_base(arg->arg.u, base), arg->arg.u);
+// =======
+// 	{
+// 		// prec = (ft_numlen_base((*arg)->arg.i, base) > (*arg)->precision) ? ft_numlen_base((*arg)->arg.i, base) : (*arg)->precision;
+
+// 		if (ft_numlen_base((*arg)->arg.i, base) > (*arg)->precision)
+// 		{
+// 			prec = ft_numlen_base((*arg)->arg.i, base);
+// 		}
+// 		else
+// 		{
+// 			// printf("\nBROKE??\n");
+// 			prec = (*arg)->precision;
+// 			if (((*arg)->conv == i || (*arg)->conv == d) && (*arg)->arg.i < 0)
+// 				prec++;
+// 		}
+// 	}
+
+// //Add extra zero when:
+// // precision is defined and is more or equal to
+
+// // prec is more than numlen and precision is defined
+// 	// printf("\n\nnumlen: %d\nprec: %d\nprecision: %d\n\n", ft_numlen((*arg)->arg.i), prec, (*arg)->precision);
+
+// 	// if ((*arg)->arg.i < 0 && prec <= (ft_numlen((*arg)->arg.i)) && (*arg)->precision != -1)
+// 		// printf("\nhere?\n");
+// 		// prec++;
+// 	// if (((*arg)->conv == i || (*arg)->conv == d) && (*arg)->arg.i < 0 && (*arg)->precision != -1)
+// 		// prec++;
+		
+// 	// if ((*arg)->arg.i < 0 && (*arg)->precision != ft_numlen_base((*arg)->arg.i, base))
+// 		// prec--;
+// 	// printf("uint is: %ld", (*arg)->arg.i);
+// 	// printf("uint is: %llx", (long long)(*arg)->arg.i);
+
+// 	// printf("\n\nnumlen: %d\nnum: %llx\n\n", ft_numlen_base((*arg)->arg.i, base), (*arg)->arg.i);
+// 	// printf("\n\nnumlen: %d\nnum: %llx\n\n", ft_numlen_base((*arg)->arg.u, base), (*arg)->arg.u);
+// >>>>>>> 370c220597dd39c77e26158b4666d8af8c76b084
 
 	//check which value gets passed into numlen base
 
-
+	(*arg)->arg_width = prec;
 	//Use base instead so you can also work with hex
 	// printf("\n\nPREC: %d\n\n", prec);//
-	// printf("\n\nprec: %d, precision: %d, numlen arg: %d\n\n", prec, arg->precision, ft_numlen_base(arg->arg.i, base));
+	// printf("\n\nprec: %d, precision: %d, numlen arg: %d\n\n", prec, (*arg)->precision, ft_numlen_base((*arg)->arg.i, base));
 	new = (char *)ft_calloc(prec + 1, sizeof(char));
 	if (!new)
 		return (NULL);
@@ -122,36 +160,36 @@ char *apply_precision(t_printf_arg *arg)
 	return (new);
 }
 
-char *fill_buffer(t_printf_arg *arg, char *conv_str)
+char *fill_buffer(t_printf_arg **arg, char *conv_str)
 {
 	char	*new;
 	size_t	len;
 	char 	padding;
 
 	new = NULL;
-	len = ft_strlen(conv_str);
+	len = (*arg)->arg_width;
 	// printf("\n\nlen %d, conv_str: '%s'\n\n", len, conv_str);
-	// printf("padding type %d\n", arg->pad_type);
+	// printf("padding type %d\n", (*arg)->pad_type);
 	// printf("precision %d\n", arg->precision);
 	// printf("field width %d\n", arg->field_width);
-	padding = (arg->pad_type == p_zero) ? '0' : ' ';//
+	padding = ((*arg)->pad_type == p_zero) ? '0' : ' ';//
 	// printf("\n\npad type before: '%c'\n\n", padding);
 
-	if ((arg->conv != s && arg->conv != c) && arg->precision != -1)
+	if (((*arg)->conv != s && (*arg)->conv != c) && (*arg)->precision != -1)
 		padding = ' ';
 	// printf("\n\npad type: '%c'\n\n", padding);
 
 	// printf("padding with '%c'\n", c);
-	arg->field_width = (arg->field_width > len) ? arg->field_width : len;//
-	// printf("field width: %d\n", arg->field_width);
-	// printf("field width: %d\n", arg->field_width);
-	new = (char *)ft_calloc(arg->field_width + 1, sizeof(char));//
+	(*arg)->field_width = ((*arg)->field_width > len) ? (*arg)->field_width : len;//
+	// printf("field width: %d\n", (*arg)->field_width);
+	// printf("field width: %d\n", (*arg)->field_width);
+	new = (char *)ft_calloc((*arg)->field_width + 1, sizeof(char));//
 	if (!new)
 		return (NULL);
 	// printf("new before memset: '%s'\n", new + 2);
-	// printf("\n\nwidth: '%d', char '%c', new: '%s'\n", arg->field_width, padding, new);
-	ft_memset(new, padding, arg->field_width);
-	// printf("'%s'\n\n", new);
+	// printf("\n\nwidth: '%d', char '%c', new: '%s'\n", (*arg)->field_width, padding, new);
+	ft_memset(new, padding, (*arg)->field_width);
+	// printf("\n\n'%s'\n\n", new);
 	// printf("new: '%s'\n", new + 2);
 	return (new);
 }

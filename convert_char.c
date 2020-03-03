@@ -6,13 +6,13 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/11 11:37:29 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/02/24 18:42:52 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/02/25 11:38:00 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char *convert_char(t_printf_arg *arg)
+char *convert_char(t_printf_arg **arg)
 {
 	char *new;
 
@@ -20,8 +20,9 @@ char *convert_char(t_printf_arg *arg)
 	new = (char *)ft_calloc(2, sizeof(char));//
 	if (!new)
 		return (NULL);
-	// new[0] = arg->arg.c;
-	ft_memcpy(new, &arg->arg.c, 1);
+	new[0] = (*arg)->arg.c;
+	(*arg)->arg_width = 1;
+	// ft_memcpy(new, arg->arg.c, 1);
 	// printf("\nconvert char: '%d', strlen: %d\n", new[0], ft_strlen(new));
 	// (void)arg->arg.c;
 	return (new);
