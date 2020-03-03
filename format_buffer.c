@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/16 20:37:40 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/02/24 21:13:23 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/03/03 13:31:48 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,8 @@ char *apply_precision(t_printf_arg *arg)
 		prec = 1;
 	else
 		prec = (ft_numlen_base(arg->arg.i, base) > arg->precision) ? ft_numlen_base(arg->arg.i, base) : arg->precision;
+	if (arg->arg.i < 0)
+		prec++;
 	// printf("uint is: %ld", arg->arg.i);
 	// printf("uint is: %llx", (long long)arg->arg.i);
 

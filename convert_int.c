@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/11 16:25:42 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/02/24 16:04:55 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/03/03 13:33:59 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ char *convert_int(t_printf_arg *arg)
 	}
 	//lets hope this monster works
 	// printf("\n\nprec buf len: %d\nnum strlen: %d\n, num: %s\n\n", ft_strlen(prec_buffer), ft_strlen(num), num);
-	ft_memcpy(prec_buffer + ft_strlen(prec_buffer) - ft_strlen(num), num, ft_strlen(num)); //THIS MONSTER DOESN'T WORK. FIX.
+	if (arg->arg.i < 0)
+		ft_memcpy(prec_buffer + ft_strlen(prec_buffer) - ft_strlen(num) + 1, num + 1, ft_strlen(num) - 1);
+	else
+		ft_memcpy(prec_buffer + ft_strlen(prec_buffer) - ft_strlen(num), num, ft_strlen(num));
 	// printf("\n\nprec_buffer: '%s', num '%s', ft_strlen: %d\n\n", prec_buffer, num, ft_strlen(num));
 	// final = ft_strjoin(prec_buffer, num);
 	// free(prec_buffer);
