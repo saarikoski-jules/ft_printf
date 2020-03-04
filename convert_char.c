@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/11 11:37:29 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/02/25 11:38:00 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/03/04 12:45:25 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,3 +52,4 @@ char *convert_char(t_printf_arg **arg)
 	// return (new);
 }
 
+// TODO Modulo!!

@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/11 11:25:10 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/02/25 19:16:54 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/03/04 14:57:34 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ char *execute_arg(t_printf_arg **arg)
 		return (NULL);
 	conv_str = conv(arg);//
 	// printf("\n\nBEFORE ADD_CONV: %s\n\n", conv_str);
+
 	// printf("\n\nconv_str: '%s'\n", conv_str);
 	// conv_str = NULL;
 	// printf("\n\nCONV_STR '%s'\n\n", conv_str);

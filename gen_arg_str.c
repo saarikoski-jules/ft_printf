@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/16 15:27:26 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/03/03 14:56:06 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/03/04 13:17:43 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void add_conv(char **final, char *conv, t_printf_arg **arg)
 		// char *item = ft_strchr(*final, '0');
 		ft_memcpy(ft_strchr(*final, '0'), "-", 1);
 	}
+	// printf("\n\nFINAL: '%s'\nCONV: '%s'\n\n", *final, conv);
 // =======
 // 	{
 // 		// {

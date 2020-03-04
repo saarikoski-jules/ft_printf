@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/03 14:52:06 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/03/03 14:52:39 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/03/04 14:58:52 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,7 @@ char *fill_buffer(t_printf_arg **arg, char *conv_str)
 	size_t	len;
 	char 	padding;
 
+	// printf("'%s'", conv_str);
 	new = NULL;
 	len = (*arg)->arg_width;
 	// printf("\n\nlen %d, conv_str: '%s'\n\n", len, conv_str);

@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 14:04:08 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/02/24 20:24:42 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/03/04 14:57:51 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,20 @@ void store_char(char chr, t_printf_arg **cur, va_list ap)
 
 int store_other(char chr, t_printf_arg **cur, va_list ap)
 {
+	char *tmp;
+
 	if (chr == 's')
 	{
-		(*cur)->arg.s = ft_strdup(va_arg(ap, char *));//
-		if (!(*cur)->arg.s)
-			return (-1);
+		tmp = va_arg(ap, char *);
+		if (tmp != NULL)
+		{
+			(*cur)->arg.s = ft_strdup(tmp);//
+			if (!(*cur)->arg.s)
+				return (-1);		
+		}
+		else
+			(*cur)->arg.s = ft_strdup("(null)");
+		// printf("\nThis is where we segfault?\n");
 		(*cur)->conv = s;
 	}
 	else if (chr == 'p')
