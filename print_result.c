@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/11 12:05:50 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/03/04 16:31:06 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/03/04 18:12:59 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ int print_conv(t_printf_arg **cur)
 	char *arg_str;
 	int ret;
 
+// TODO Check if conversions valid and doesnt fail. If fails, ignore.
+
 	arg_str = execute_arg(cur);
 	ret = print_item(arg_str, (*cur)->field_width);
 	return (ret);
@@ -87,6 +89,7 @@ int skip_conv(const char *str)
 	int len;
 
 	len = ft_strchrset(str + 1, "cspdiuxX%");
+	// TODO change this into strncmp for 0123456789.-*
 	// printf("\n\nformat str starts: %s\n\n", str);
 	// printf("\n\nformat str length: %d\n\n", len);
 

@@ -76,9 +76,13 @@ int main()
 	// printf("%%");
 
 // FIX THIS!!!!!:
+	// ft_printf("%c  %C aa", 2, 2);
 
-	// printf("printf: Text1\nText2\nTest4%CTest5\n", 0x0381);
-	// ft_printf("ft_printf: Text1\nText2\nTest4%CTest5\n", 0x0381);
+	ret = printf("printf: Text1\nText2%c\nTest3%CTest4%cTest5\n", 'a', 0x0381);
+	ret = ft_printf("printf: Text1\nText2%c\nTest3%CTest4%cTest5\n", 'a', 0x0381);
+	// printf("%d", ret);
+	// ft_printf("printf: Text1\nText2\nTest4%CTest5\n", 0x0381);
+	// ft_printf("printf: Text1\nText2\nTest4%cTest5\n", 0x0381);
 //!!!!!!!!
 
 
@@ -93,7 +97,7 @@ int main()
 
 
 	// printf("%d\n", 0);
-	ft_printf("%d\n", 0);
+	// ft_printf("%d\n", 0);
 
 	free(str);
 	// while (1);

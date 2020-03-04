@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/13 17:22:11 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/03/04 13:42:33 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/03/04 16:39:27 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,3 +81,5 @@ char *convert_ptr(t_printf_arg **arg)
 	// printf("\n\nprec: '%s'\n\n", final);
 	return (final);
 }
+
+// TODO negative fake pointers do weird
