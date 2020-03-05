@@ -59,6 +59,7 @@ int main()
 
 	// printf("%c, %d, %s, %x, %X, %p, %p\n", 'c', 12, str, 12, 12, str, str + 1);
 	int ret;
+	int ret1;
 
 	// ret = ft_printf("'FT_PRINTF:\nThis is a string %s with the length of %0-12.7d\nwith the ptr address of %p\nAlso, this is hex %X\ni = %i\nproper u = %u\nbad u = %u'\n", str, 6, str, 0x70, 12, 12, -12);
 	// ft_printf("RETURN VALUE %d\n\n", ret);
@@ -78,8 +79,12 @@ int main()
 // FIX THIS!!!!!:
 	// ft_printf("%c  %C aa", 2, 2);
 
-	ret = printf("printf: Text1\nText2%c\nTest3%CTest4%cTest5\n", 'a', 0x0381);
+	// ret = printf("printf: Text1\nText2%c\nTest3%CTest4%cTest5\n", 'a', 0x0381);
 	ret = ft_printf("printf: Text1\nText2%c\nTest3%CTest4%cTest5\n", 'a', 0x0381);
+	printf("%d\n\n", ret);
+	ret1 = printf("printf: Text1\nText2%c\nTest3%jTest4%cTest5\n", 'a', 0x0381);
+	printf("\n%d\n\n", ret1);
+
 	// printf("%d", ret);
 	// ft_printf("printf: Text1\nText2\nTest4%CTest5\n", 0x0381);
 	// ft_printf("printf: Text1\nText2\nTest4%cTest5\n", 0x0381);

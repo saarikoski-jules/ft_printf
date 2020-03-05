@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/11 12:05:50 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/03/04 18:12:59 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/03/05 13:53:40 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,17 +84,17 @@ int print_conv(t_printf_arg **cur)
 	return (ret);
 }
 
-int skip_conv(const char *str)
-{
-	int len;
+// int skip_conv(const char *str)
+// {
+// 	int len;
 
-	len = ft_strchrset(str + 1, "cspdiuxX%");
-	// TODO change this into strncmp for 0123456789.-*
-	// printf("\n\nformat str starts: %s\n\n", str);
-	// printf("\n\nformat str length: %d\n\n", len);
+// 	len = ft_strchrset(str + 1, "cspdiuxX%");
+// 	// TODO change this into strncmp for 0123456789.-*
+// 	// printf("\n\nformat str starts: %s\n\n", str);
+// 	// printf("\n\nformat str length: %d\n\n", len);
 
-	return (len + 2);
-}
+// 	return (len + 2);
+// }
 
 int manage_print(const char *str, t_printf_arg **head)
 {
@@ -113,12 +113,20 @@ int manage_print(const char *str, t_printf_arg **head)
 		{
 			// printf("\nprinting cur: '%s'\n", str + prev);
 			ret += print_item(str + prev, i - prev);
-			ret += print_conv(&cur_arg);
-			// if (cur_arg->next != NULL)
-			cur_arg = cur_arg->next;
-			i += skip_conv(str + i);
-			// printf("\n\nstr[%d] = %c\n\n", i, str[i]);
+			int yay = ft_strmatch(str + i + 1, "0123456789-*.");
+			// printf("\nlen: %d, '%s'\n", yay, str + i);
+			i += yay + 2;
+			// printf("\n\n%d, '%s'\n\n", i, str + i);
 			prev = i;
+			// printf("\n'%s', %s\n", str + i, ft_strchr("cspdiuxX%", str[i - 1]));
+
+			if (ft_strchr("cspdiuxX%", str[i - 1]) != NULL)
+			{
+				ret += print_conv(&cur_arg);
+				cur_arg = cur_arg->next;
+			}
+			// if (cur_arg->next != NULL)
+			// printf("\n\nstr[%d] = %c\n\n", i, str[i]);
 			// printf("\nprev: %d\n", prev);
 		}
 		else

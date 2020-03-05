@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 14:05:00 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/03/04 18:28:59 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/03/05 14:18:10 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_printf_arg	*gen_elem(t_printf_arg **head)
 
 int store_conv(char chr, t_printf_arg **cur, va_list ap)
 {
-	printf("aaahhhhhhha");
+	// printf("aaahhhhhhha");
 	if (ft_strchr("uxX", chr))
 		store_uint(chr, cur, ap);
 	else if (ft_strchr("di", chr))
@@ -50,23 +50,18 @@ int store_conv(char chr, t_printf_arg **cur, va_list ap)
 		if (store_other(chr, cur, ap) == -1)
 			return (-1);
 	}
-	else
-	{
-		// printf("aaaaaaaaa");
-		return (-1);
-	}
 	return (1);
 }
 
-int find_conv_str(const char *str)
-{
-	int i;
+// int find_conv_str(const char *str)
+// {
+// 	int i;
 
-	i = 0;
-	while (ft_strchr("0123456789-*.", str[i]) != NULL)
-		i++;
-	return (i);
-}
+// 	i = 0;
+// 	while (ft_strchr("0123456789-*.", str[i]) != NULL)
+// 		i++;
+// 	return (i);
+// }
 
 int	gen_arg_list(t_printf_arg **head, const char *str, va_list ap)
 {
@@ -74,32 +69,52 @@ int	gen_arg_list(t_printf_arg **head, const char *str, va_list ap)
 	t_printf_arg	*cur;
 	char			*format_str;
 	int	len;
+	int	ret;
 
 	i = 0;
+	ret = 1;
 	while(str[i] != '\0')
 	{
 		if (str[i] == '%')
 		{
-			cur = gen_elem(head);
-			len = find_conv_str(str + i + 1);
+			i++;
+			len = ft_strmatch(str + i, "0123456789-*.");
 			format_str = (char *)ft_calloc(len + 1, sizeof(char));
 			if (!format_str)
 				return (-1);
-			ft_strlcpy(format_str, str + i + 1, len);
-			// format_str = ft_strdupchr(str + i + 1, "cspdiuxX%");//
-			manage_parser(&cur, format_str, ap);
-			free(format_str);
-			// i += ft_strchrset(str + i + 1, "cspdiuxX%");
+			ft_strlcpy(format_str, str + i, len + 1);
 			i += len;
+
+			// printf("%c, %s\n", str[i], ft_strchr("cspdiuxX%", str[i]));
+
+			if (ft_strchr("cspdiuxX%", str[i]) != NULL)
+			{
+				// printf("aa");
+				cur = gen_elem(head);
+				manage_parser(&cur, format_str, ap);
+				if (store_conv(str[i], &cur, ap) == -1)//
+				{
+					free(format_str);
+					return (-1);
+				}
+				// printf("\nret: %d\n", ret);
+				// if (ret == 0)
+			}
+			// printf("\nstr: '%s'\n", format_str);
+			// format_str = ft_strdupchr(str + i, "cspdiuxX%");//
+			free(format_str);
+			// i += ft_strchrset(str + i, "cspdiuxX%");
+			// printf("char: str[%d] = '%s'\n", i, str + i);
+
 			// printf("\n\nWORKS HERE: store_conv(str[%d + 1] = %c\n%s)\n\n", i, str[i + 1], str);
-			if (store_conv(str[i + 1], &cur, ap) == -1)//
-				return (-1);
-			i++;
 		}
 		i++;
 	}
-	return (1);
+	return (ret);
 }
+
+//should this return -1 when given a bad conversion
+
 
 // TODO Change skipping of format string to instead of looking for conversion, it skips all formatting chars? If bad conversion, skip over conversion  0-*123456789.
 
