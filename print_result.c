@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/11 12:05:50 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/03/05 13:53:40 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/03/05 18:26:42 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ int print_conv(t_printf_arg **cur)
 // TODO Check if conversions valid and doesnt fail. If fails, ignore.
 
 	arg_str = execute_arg(cur);
+	if (arg_str == NULL)
+		return (-1);
 	ret = print_item(arg_str, (*cur)->field_width);
 	return (ret);
 }
@@ -102,6 +104,7 @@ int manage_print(const char *str, t_printf_arg **head)
 	int i;
 	int prev;
 	int ret;
+	int	fail;
 
 	cur_arg = *head;
 	i = 0;
@@ -122,7 +125,14 @@ int manage_print(const char *str, t_printf_arg **head)
 
 			if (ft_strchr("cspdiuxX%", str[i - 1]) != NULL)
 			{
-				ret += print_conv(&cur_arg);
+				fail = print_conv(&cur_arg);
+				if (fail == -1)
+				{
+					//free everything?
+					//if conversion fails, what should i do?? Hop over and not print, but return -1?
+					return (-1);
+				}
+				ret += fail;
 				cur_arg = cur_arg->next;
 			}
 			// if (cur_arg->next != NULL)

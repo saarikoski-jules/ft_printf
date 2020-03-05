@@ -80,9 +80,9 @@ int main()
 	// ft_printf("%c  %C aa", 2, 2);
 
 	// ret = printf("printf: Text1\nText2%c\nTest3%CTest4%cTest5\n", 'a', 0x0381);
-	ret = ft_printf("printf: Text1\nText2%c\nTest3%CTest4%cTest5\n", 'a', 0x0381);
+	ret = ft_printf("printf: Text1\nText2%c\nTest3%CTest4%cTest5\n", NULL, 'a', 0x0381);
 	printf("%d\n\n", ret);
-	ret1 = printf("printf: Text1\nText2%c\nTest3%jTest4%cTest5\n", 'a', 0x0381);
+	ret1 = printf("printf: Text1\nText2%c\nTest3%jTest4%cTest5\n", NULL, 'a', 0x0381);
 	printf("\n%d\n\n", ret1);
 
 	// printf("%d", ret);
