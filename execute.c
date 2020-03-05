@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/11 11:25:10 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/03/04 14:57:34 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/03/05 16:32:57 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ char *execute_arg(t_printf_arg **arg)
 	if (!conv_str)
 		return (NULL);
 	final_str = fill_buffer(arg, conv_str);//
-	// printf("\n\nFINAL_STR '%s'\n\n", final_str);
+	// printf("\n\nFINAL_STR '%s'\nCONV__STR '%s'\n\n", final_str, conv_str);
 	// printf("final_str: '%s'\n\n", final_str);
 	// printf("segfault???\n");
 	if (!final_str)

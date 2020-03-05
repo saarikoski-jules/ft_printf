@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/03 14:53:15 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/03/03 14:56:47 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/03/05 17:18:49 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,20 @@ char *convert_int(t_printf_arg **arg)
 
 
 	// printf("\n\nIN CONVERT INT: %u\n\n", arg->arg.u);
-	prec_buffer = apply_precision(arg);//
-	// printf("\n\nprec buf %s\n\n", prec_buffer);
-	if (!prec_buffer)
-		return (NULL);
 	if ((*arg)->arg.i == 0 && (*arg)->precision == 0)
 		num = ft_strdup("");
 	else
 		num = ft_lltoa_base((long long)(*arg)->arg.i, 10);//
 	if (!num)
 	{
-		free(prec_buffer);
+		// free(prec_buffer);
+		return (NULL);
+	}
+	prec_buffer = apply_precision(arg, num);//
+	// printf("\n\nprec buf %s\n\n", prec_buffer);
+	if (!prec_buffer)
+	{
+		free(num);
 		return (NULL);
 	}
 	//lets hope this monster works
@@ -89,18 +92,21 @@ char *convert_uint(t_printf_arg **arg)
 	char *final;
 
 	// printf("\n\nIN CONVERT UINT: %u\n\n", arg->arg.u);
-	prec_buffer = apply_precision(arg);//
-	// printf("\napply prec: '%s'\n", prec_buffer);
-
-	if (!prec_buffer)
-		return (NULL);
 	if ((*arg)->arg.u == 0 && (*arg)->precision == 0)
 		num = ft_strdup("");
 	else
 		num = ft_ulltoa_base((long long)(*arg)->arg.u, 10);//
 	if (!num)
 	{
-		free(prec_buffer);
+		// free(prec_buffer);
+		return (NULL);
+	}
+	prec_buffer = apply_precision(arg, num);//
+	// printf("\napply prec: '%s'\n", prec_buffer);
+
+	if (!prec_buffer)
+	{
+		free(num);
 		return (NULL);
 	}
 	ft_memcpy(prec_buffer + ft_strlen(prec_buffer) - ft_strlen(num), num, ft_strlen(num));

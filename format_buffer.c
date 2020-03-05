@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/03 14:52:06 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/03/04 14:58:52 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/03/05 17:42:33 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,16 @@
 //fill buffer with as many zeroes as thee actual precision is
 //run apply precision before memcpying the actual numstr over
 
-char *apply_precision(t_printf_arg **arg)
+char *apply_precision(t_printf_arg **arg, char *num_str)
 {
 	int prec;
 	char *new;
 	int base;
+	int len;
 
+	len = ft_strlen(num_str);//
+	if (num_str[0] == '-')
+		len--;
 	// printf("uint is: %d", arg->arg.u);
 	if ((*arg)->conv == p || (*arg)->conv == x || (*arg)->conv == X)
 		base = 16;
@@ -99,10 +103,14 @@ char *apply_precision(t_printf_arg **arg)
 	else if ((*arg)->arg.i == 0 && (*arg)->precision == -1)
 		prec = 1;
 	else
-// <<<<<<< HEAD
-		prec = (ft_numlen_base((*arg)->arg.i, base) > (*arg)->precision) ? ft_numlen_base((*arg)->arg.i, base) : (*arg)->precision;
-	if ((*arg)->arg.i < 0)
+	{
+		// printf("\n\nstr: '%s', strlen: %d\n\n", num_str, len);
+		prec = (len > (*arg)->precision) ? len : (*arg)->precision;
+		// printf("\n\n'%s', len: %d, prec %d\n\n", num_str, len, prec);
+	}
+	if (((*arg)->conv == i || (*arg)->conv == d) && (*arg)->arg.i < 0)
 		prec++;
+		// printf("\n\nprec: %d\n\n", prec);
 	// printf("uint is: %ld", arg->arg.i);
 	// printf("uint is: %llx", (long long)arg->arg.i);
 

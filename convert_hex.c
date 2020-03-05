@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/13 16:29:44 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/02/25 14:40:55 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/03/05 17:10:26 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,19 @@ char *convert_hex_lc(t_printf_arg **arg)
 
 	// printf("\n\nIN HEX LC %d\n", (*arg)->arg.u);
 	// printf("IN HEX LC %x\n\n", (*arg)->arg.u);
-	prec_buffer = apply_precision(arg);//
-	if (!prec_buffer)
-		return (NULL);
 	if ((*arg)->arg.u == 0 && (*arg)->precision == 0)
 		num = ft_strdup("");
 	else
 		num = ft_lltoa_base((long long)(*arg)->arg.u, 16);//
 	if (!num)
 	{
-		free(prec_buffer);
+		// free(prec_buffer);
+		return (NULL);
+	}
+	prec_buffer = apply_precision(arg, num);//
+	if (!prec_buffer)
+	{
+		free(num);
 		return (NULL);
 	}
 	ft_memcpy(prec_buffer + ft_strlen(prec_buffer) - ft_strlen(num), num, ft_strlen(num));
@@ -87,16 +90,19 @@ char *convert_hex_uc(t_printf_arg **arg)
 
 	// printf("\n\nIN HEX UC %d\n", (*arg)->arg.u);
 	// printf("IN HEX UC %X\n\n", (*arg)->arg.u);
-	prec_buffer = apply_precision(arg);//
-	if (!prec_buffer)
-		return (NULL);
 	if ((*arg)->arg.u == 0 && (*arg)->precision == 0)
 		num = ft_strdup("");
 	else
 		num = ft_lltoa_base((long long)(*arg)->arg.u, 16);//
 	if (!num)
 	{
-		free(prec_buffer);
+		// free(prec_buffer);
+		return (NULL);
+	}
+	prec_buffer = apply_precision(arg, num);//
+	if (!prec_buffer)
+	{
+		free(num);
 		return (NULL);
 	}
 	ft_memcpy(prec_buffer + ft_strlen(prec_buffer) - ft_strlen(num), num, ft_strlen(num));

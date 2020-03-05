@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/13 17:22:11 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/03/04 16:39:27 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/03/05 17:11:26 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,21 +47,28 @@ char *convert_ptr(t_printf_arg **arg)
 	char *buf;
 	char *final;
 
-	prec_buffer = apply_precision(arg);//
-	if (!prec_buffer)
-		return (NULL);
 	if ((*arg)->arg.p == 0 && (*arg)->precision == 0)
 		num = ft_strdup("");
 	else
 	{
-		num = ft_ulltoa_base((long long)(*arg)->arg.p, 16);//
+		// printf("\n\n'%llu'\n", (*arg)->arg.p);
+		// printf("'%llx'\n", (*arg)->arg.p);
+		// printf("'%p'\n", (*arg)->arg.p);
+		num = ft_ulltoa_base((*arg)->arg.p, 16);//
 		// printf("\n\n'%s'\n\n", num);
 	}
 	if (!num)
 	{
-		free(prec_buffer);
+		// free(prec_buffer);
 		return (NULL);
 	}
+	prec_buffer = apply_precision(arg, num);//
+	if (!prec_buffer)
+	{
+		free(num);
+		return (NULL);
+	}
+	// printf("\n\nPREC: '%s'\nNUMB: '%s'\nstrlen: %d\n\n", prec_buffer, num, strlen(prec_buffer));
 	ft_memcpy(prec_buffer + ft_strlen(prec_buffer) - ft_strlen(num), num, ft_strlen(num));
 	// printf("prec: '%s'\n\n", prec_buffer);
 	// buf = ft_strjoin(prec_buffer, num);

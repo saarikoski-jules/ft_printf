@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 14:04:08 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/03/05 12:43:45 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/03/05 14:54:33 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int store_other(char chr, t_printf_arg **cur, va_list ap)
 	}
 	else if (chr == 'p')
 	{
-		(*cur)->arg.p = va_arg(ap, void *);
+		(*cur)->arg.p = va_arg(ap, unsigned long);
 		(*cur)->conv = p;
 	}
 	return (1);
