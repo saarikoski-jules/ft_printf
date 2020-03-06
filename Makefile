@@ -6,7 +6,7 @@
 #    By: jsaariko <jsaariko@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/12/03 20:38:39 by jsaariko       #+#    #+#                 #
-#    Updated: 2020/03/06 16:43:44 by jsaariko      ########   odam.nl          #
+#    Updated: 2020/03/06 17:53:42 by jsaariko      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ C_FILES	=	ft_printf.c \
 			convert_hex.c \
 			convert_str.c \
 			convert_ptr.c \
+			convert_float.c \
 			format_buffer.c \
 			clear_list.c
 

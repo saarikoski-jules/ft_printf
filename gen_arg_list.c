@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 14:05:00 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/03/06 14:59:02 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/03/06 17:50:16 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int				store_conv(char chr, t_printf_arg **cur, va_list ap)
 		store_int(chr, cur, ap);
 	else if (ft_strchr("c%", chr))
 		store_char(chr, cur, ap);
+	else if (ft_strchr("f", chr))
+		store_float(cur, ap);
 	else if (ft_strchr("sp", chr))
 	{
 		if (store_other(chr, cur, ap) == -1)
@@ -98,7 +100,7 @@ int				gen_arg_list(t_printf_arg **head, const char *str, va_list ap)
 			if (!format_str)
 				return (-1);
 			i += len;
-			if (ft_strchr("cspdiuxX%", str[i]) != NULL)
+			if (ft_strchr("cspdiuxXf%", str[i]) != NULL)
 			{
 				if (parse_arg(head, &format_str, ap, str[i]) == -1)
 					return (-1);

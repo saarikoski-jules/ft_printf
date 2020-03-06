@@ -6,14 +6,14 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/14 13:02:19 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/03/06 12:54:00 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/03/06 17:52:10 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
-# include <unistd.h>
-# include <stdarg.h>
+# include <unistd.h>//
+# include <stdarg.h>//
 # include "libft/libft.h"
 
 typedef union		u_type
@@ -23,6 +23,7 @@ typedef union		u_type
 	char				c;
 	char				*s;
 	unsigned long long	p;
+	double				f;
 }					t_type;
 
 typedef enum		e_conversion
@@ -35,6 +36,7 @@ typedef enum		e_conversion
 	x,
 	X,
 	p,
+	f,
 }					t_conversion;
 
 typedef enum		e_padding
@@ -80,6 +82,7 @@ t_transition_code	get_transition_code(char token);
 void				store_int(char c, t_printf_arg **cur, va_list ap);
 void				store_uint(char c, t_printf_arg **cur, va_list ap);
 void				store_char(char c, t_printf_arg **cur, va_list ap);
+void				store_float(t_printf_arg **cur, va_list ap);
 int					store_other(char c, t_printf_arg **cur, va_list ap);
 void				add_conv(char **final, char *conv, t_printf_arg **arg);
 
@@ -98,6 +101,7 @@ char				*convert_str(t_printf_arg **arg);
 char				*convert_hex_lc(t_printf_arg **arg);
 char				*convert_hex_uc(t_printf_arg **arg);
 char				*convert_ptr(t_printf_arg **arg);
+char				*convert_float(t_printf_arg **arg);
 char				*apply_precision(t_printf_arg **arg, char *str);
 char				*fill_buffer(t_printf_arg **arg);
 
