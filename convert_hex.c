@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/13 16:29:44 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/03/05 18:35:15 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/03/06 09:25:51 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ char	*convert_hex_lc(t_printf_arg **arg)
 {
 	char *prec_buffer;
 	char *num;
-	char *final;
 
 	if ((*arg)->arg.u == 0 && (*arg)->precision == 0)
 		num = ft_strdup("");
@@ -41,7 +40,6 @@ char	*convert_hex_uc(t_printf_arg **arg)
 {
 	char *prec_buffer;
 	char *num;
-	char *final;
 
 	if ((*arg)->arg.u == 0 && (*arg)->precision == 0)
 		num = ft_strdup("");

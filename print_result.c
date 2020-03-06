@@ -6,105 +6,59 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/11 12:05:50 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/03/05 18:26:42 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/03/06 16:41:24 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
-int print_item(const char *str, int len)
+int	print_conv(t_printf_arg **cur)
 {
-
-	// printf("\n\nitem: '%s', len %d\n\n", str, len);
-	return (write(1, str, len));
-}
-
-// int manage_print(const char *str, t_printf_arg **head)
-// {
-// 	t_printf_arg	*cur_arg;
-// 	char			*arg_str;
-// 	// char			*item;
-// 	int				len;
-// 	int				i;
-// 	int				ret;
-
-// 	i = 0;
-// 	len = 0;
-// 	ret = 0;
-// 	cur_arg = *head;
-// 	while (1)
-// 	{
-// 		// printf("str[%d] == '%c'\n", i, str[i]);
-// 		if (str[i] == '%' || str[i] == '\0')
-// 		{
-// 			ret += print_item(str + len, i - len);
-// 			len = i + 2 + ft_strchrset(str + i + 1, "cspdiuxX%"); //plus the conversion etc
-// 			// printf("%d\n", len);
-// 			if (str[i] == '%')
-// 			{			
-// 				// printf("str[i] = '%c, i = %d'\n", str[i], i);
-// 				arg_str = execute_arg(&cur_arg);//
-// 				if (!arg_str)
-// 				{
-// 					return (-1);
-// 				}
-// 				ret += print_item(arg_str, cur_arg->field_width);
-// 				if (cur_arg->next != NULL)
-// 					cur_arg = cur_arg->next;
-// 				if (ret == -1)
-// 				{
-// 					free(arg_str);
-// 					return (-1);
-// 				}
-// 				free(arg_str);
-// 			}
-// 			if (str[i] == '\0')
-// 				return (ret);
-// 			if (i + 1 != '\0') //double check the necessity/logic here
-// 				i++;
-// 		}
-// 		i++;
-// 	}
-// 	return (ret);
-// }
-
-
-// take out entire conversion from str
-
-int print_conv(t_printf_arg **cur)
-{
-	char *arg_str;
-	int ret;
-
-// TODO Check if conversions valid and doesnt fail. If fails, ignore.
+	char	*arg_str;
+	int		ret;
 
 	arg_str = execute_arg(cur);
 	if (arg_str == NULL)
 		return (-1);
-	ret = print_item(arg_str, (*cur)->field_width);
+	ret = write(1, arg_str, (*cur)->field_width);
 	return (ret);
 }
 
-// int skip_conv(const char *str)
-// {
-// 	int len;
-
-// 	len = ft_strchrset(str + 1, "cspdiuxX%");
-// 	// TODO change this into strncmp for 0123456789.-*
-// 	// printf("\n\nformat str starts: %s\n\n", str);
-// 	// printf("\n\nformat str length: %d\n\n", len);
-
-// 	return (len + 2);
-// }
-
-int manage_print(const char *str, t_printf_arg **head)
+int	print_section(const char *str, t_printf_arg **cur_arg, int *i, int *prev)
 {
-	t_printf_arg *cur_arg;
-	int i;
-	int prev;
 	int ret;
-	int	fail;
+	int cur_ret;
+
+	ret = 0;
+	if (str[*i] == '%')
+	{
+		cur_ret = write(1, str + *prev, *i - *prev);
+		if (cur_ret == -1)
+			return (-1);
+		ret += cur_ret;
+		*i += ft_strmatch(str + *i + 1, "0123456789-*.") + 2;
+		*prev = *i;
+		if (ft_strchr("cspdiuxX%", str[*i - 1]) != NULL)
+		{
+			cur_ret = print_conv(cur_arg);
+			if (cur_ret == -1)
+				return (-1);
+			ret += cur_ret;
+			*cur_arg = (*cur_arg)->next;
+		}
+	}
+	else
+		(*i)++;
+	return (ret);
+}
+
+int	manage_print(const char *str, t_printf_arg **head)
+{
+	t_printf_arg	*cur_arg;
+	int				i;
+	int				prev;
+	int				ret;
+	int				cur_ret;
 
 	cur_arg = *head;
 	i = 0;
@@ -112,116 +66,14 @@ int manage_print(const char *str, t_printf_arg **head)
 	ret = 0;
 	while (str[i] != '\0')
 	{
-		if (str[i] == '%')
-		{
-			// printf("\nprinting cur: '%s'\n", str + prev);
-			ret += print_item(str + prev, i - prev);
-			int yay = ft_strmatch(str + i + 1, "0123456789-*.");
-			// printf("\nlen: %d, '%s'\n", yay, str + i);
-			i += yay + 2;
-			// printf("\n\n%d, '%s'\n\n", i, str + i);
-			prev = i;
-			// printf("\n'%s', %s\n", str + i, ft_strchr("cspdiuxX%", str[i - 1]));
-
-			if (ft_strchr("cspdiuxX%", str[i - 1]) != NULL)
-			{
-				fail = print_conv(&cur_arg);
-				if (fail == -1)
-				{
-					//free everything?
-					//if conversion fails, what should i do?? Hop over and not print, but return -1?
-					return (-1);
-				}
-				ret += fail;
-				cur_arg = cur_arg->next;
-			}
-			// if (cur_arg->next != NULL)
-			// printf("\n\nstr[%d] = %c\n\n", i, str[i]);
-			// printf("\nprev: %d\n", prev);
-		}
-		else
-		{
-			// printf("\nstr[%d] = '%c'\n", i, str[i]);
-			i++;
-		}
-		//print everything up to a %
-		//skip everything between % and conv
-		// print_conv(&cur_arg);//print conversion
+		cur_ret = print_section(str, &cur_arg, &i, &prev);
+		if (cur_ret == -1)
+			return (-1);
+		ret += cur_ret;
 	}
-	// printf("\n\nstart: '%s', len: %d\n\n", str + prev, i - prev);
-	ret += print_item(str + prev, i - prev);
-	// printf("\n\nFINISHED\n\n");
+	cur_ret = write(1, str + prev, i - prev);
+	if (cur_ret == -1)
+		return (-1);
+	ret += cur_ret;
 	return (ret);
 }
-
-
-// int write_string(const char *str, int *ret)
-// {
-// 	int len;
-
-// 	len = 0;
-// 	// printf("\n\nWRITE STRING: '%s', RET: %d\n\n", str, *ret);
-// 	while(str[len] != '\0' && str[len] != '%')
-// 	{
-// 		// printf("str[%d] = %c\n", len, str[len]);
-// 		len++;
-// 	}
-// 	*ret += print_item(str, len);
-// 	// while (str[len] != '\0' || str[len] != '%')
-// 	// {
-// 	// 	printf("str[%d] = %c\n", len, str[len]);
-// 	// 	len++;
-// 	// }
-// 	// *ret += print_item(str, len);
-// 	printf("\n\nlen = %d\n\n", len);
-// 	return (len);
-// }
-
-// int write_conv(t_printf_arg *arg, int *ret)
-// {
-// 	char *arg_str;
-// 	int		len;
-
-// 	arg_str = execute_arg(&arg);
-// 	// printf("\n%s\n", arg_str);
-// 	*ret = print_item(arg_str, arg->field_width);
-// 	return (1);
-// }
-
-// int manage_print(const char *str, t_printf_arg **head)
-// {
-// 	t_printf_arg	*cur_arg;
-// 	// char			*arg_str;
-// 	int				ret;
-// 	int				i;
-// 	int				search;
-
-// 	ret = 0;
-// 	cur_arg = *head;
-// 	i = 0;
-// 	// printf("in manage print\n");
-// 	while(str[i] != '\0')
-// 	{
-// 		// printf("\n\n\n--------STR[%d] = %c-------------\n\n\n", i, str[i]);
-// 		i = i + write_string(str + i, &ret);
-// 		// printf("\n\n-------- i = %d -------\n\n", i);
-// 		if (cur_arg != NULL)
-// 		{
-// 			write_conv(cur_arg, &ret);
-// 			cur_arg = cur_arg->next;
-// 		}
-// 		search = ft_strchrset(str + i + 1, "cspdiuxX%");
-// 		// printf("string: %s\n", str + i + 1);
-// 		if (search != -1)
-// 			i = i + search + 1;
-// 		// printf("'%c', %d, %d\n", str[i], i, search);
-// 		// i++;
-
-// 	}
-// 	// while (str[i] != '\0')
-// 	// {
-// 		// printf("%d\n", i);
-// 		// write_arg(cur_arg, &ret);
-// 	// }
-// 	return (ret);
-// }

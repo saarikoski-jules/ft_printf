@@ -6,11 +6,12 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/10 16:22:10 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/02/20 18:00:55 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/03/06 09:48:16 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include "fsm.h"
 
 static void	*get_next_state(void (*prev_state)(char, t_printf_arg **, va_list),
 							t_transition_code transition)
@@ -18,11 +19,11 @@ static void	*get_next_state(void (*prev_state)(char, t_printf_arg **, va_list),
 	int	i;
 
 	i = 0;
-	while (&transition_table[i])
+	while (&g_transition_table[i])
 	{
-		if ((&transition_table[i])->orig_state == prev_state &&
-			(&transition_table[i])->transition == transition)
-			return ((&transition_table[i])->next_state);
+		if ((&g_transition_table[i])->orig_state == prev_state &&
+			(&g_transition_table[i])->transition == transition)
+			return ((&g_transition_table[i])->next_state);
 		i++;
 	}
 	return (error_state);
@@ -35,10 +36,6 @@ void		manage_parser(t_printf_arg **arg, char *tokens, va_list ap)
 	int					i;
 
 	i = 0;
-	// if (state)
-	// {
-		// printf("aaa\n");
-	// }
 	state = &entry_state;
 	while (tokens[i] != '\0')
 	{

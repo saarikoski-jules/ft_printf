@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/03 14:53:15 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/03/05 18:33:43 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/03/06 09:35:05 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ char	*convert_int(t_printf_arg **arg)
 {
 	char *prec_buffer;
 	char *num;
-	char *final;
 
 	if ((*arg)->arg.i == 0 && (*arg)->precision == 0)
 		num = ft_strdup("");
@@ -31,15 +30,11 @@ char	*convert_int(t_printf_arg **arg)
 		return (NULL);
 	}
 	if ((*arg)->arg.i < 0)
-	{
 		ft_memcpy(prec_buffer + ft_strlen(prec_buffer) - ft_strlen(num) + 1,
 					num + 1, ft_strlen(num) - 1);
-	}
 	else
-	{
 		ft_memcpy(prec_buffer + ft_strlen(prec_buffer) - ft_strlen(num),
 					num, ft_strlen(num));
-	}
 	free(num);
 	return (prec_buffer);
 }
@@ -48,7 +43,6 @@ char	*convert_uint(t_printf_arg **arg)
 {
 	char *prec_buffer;
 	char *num;
-	char *final;
 
 	if ((*arg)->arg.u == 0 && (*arg)->precision == 0)
 		num = ft_strdup("");

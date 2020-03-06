@@ -6,7 +6,7 @@
 #    By: jsaariko <jsaariko@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/12/03 20:38:39 by jsaariko       #+#    #+#                 #
-#    Updated: 2020/03/05 13:01:30 by jsaariko      ########   odam.nl          #
+#    Updated: 2020/03/06 09:24:43 by jsaariko      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -98,7 +98,7 @@ $(NAME): lib $(O_FILES)
 	@echo "libftprintf.a compiled"
 
 $(O_FILES):
-	@gcc -c $(C_FILES)
+	@gcc $(FLAGS) -c $(C_FILES)
 	@echo "Printf object files compiled"
 
 lib:

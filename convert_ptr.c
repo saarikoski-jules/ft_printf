@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/13 17:22:11 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/03/05 18:31:18 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/03/06 09:32:03 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ char	*convert_ptr(t_printf_arg **arg)
 {
 	char *prec_buffer;
 	char *num;
-	char *buf;
-	char *final;
 
 	if ((*arg)->arg.p == 0 && (*arg)->precision == 0)
 		num = ft_strdup("");
@@ -34,11 +32,11 @@ char	*convert_ptr(t_printf_arg **arg)
 	ft_memcpy(prec_buffer + ft_strlen(prec_buffer) - ft_strlen(num), num,
 				ft_strlen(num));
 	free(num);
-	final = ft_strjoin("00", prec_buffer);
+	num = ft_strjoin("00", prec_buffer);
 	(*arg)->arg_width += 2;
 	free(prec_buffer);
-	if (!final)
+	if (!num)
 		return (NULL);
-	ft_tolowerstr(&final);
-	return (final);
+	ft_tolowerstr(&num);
+	return (num);
 }

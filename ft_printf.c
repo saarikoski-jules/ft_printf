@@ -6,12 +6,11 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/05 18:15:21 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/03/05 18:15:24 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/03/06 14:55:50 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "libft/libft.h"
 
 int	ft_printf(const char *str, ...)
 {
