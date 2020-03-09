@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/16 15:27:26 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/03/06 10:16:17 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/03/09 18:47:05 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void	add_conv(char **final, char *conv, t_printf_arg **arg)
 		ft_memcpy(*final, conv, conv_len);
 	else
 		ft_memcpy(*final + final_len - conv_len, conv, conv_len);
-	if ((*arg)->arg.i < 0 && ((*arg)->conv == i || (*arg)->conv == d))
+	if ((*arg)->arg.i < 0 &&
+		((*arg)->conv == i || (*arg)->conv == d || (*arg)->conv == f))
 		ft_memcpy(ft_strchr(*final, '0'), "-", 1);
 	if ((*arg)->conv == p)
 	{

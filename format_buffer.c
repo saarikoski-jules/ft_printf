@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/03 14:52:06 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/03/06 10:10:31 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/03/09 18:46:05 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ char			*fill_buffer(t_printf_arg **arg)
 		padding = '0';
 	else
 		padding = ' ';
-	if (((*arg)->conv != s && (*arg)->conv != c) && (*arg)->precision != -1)
+	if (((*arg)->conv != s && (*arg)->conv != c && (*arg)->conv != f)
+		&& (*arg)->precision != -1)
 		padding = ' ';
 	if ((*arg)->field_width < len)
 		(*arg)->field_width = len;

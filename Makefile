@@ -6,7 +6,7 @@
 #    By: jsaariko <jsaariko@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/12/03 20:38:39 by jsaariko       #+#    #+#                 #
-#    Updated: 2020/03/06 17:53:42 by jsaariko      ########   odam.nl          #
+#    Updated: 2020/03/09 15:42:40 by jsaariko      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,7 +83,9 @@ LIBFT_C = $(LIBFT_DIR)ft_putchar_fd \
 				$(LIBFT_DIR)ft_toupperstr \
 				$(LIBFT_DIR)ft_tolowerstr \
 				$(LIBFT_DIR)ft_strjoinindex \
-				$(LIBFT_DIR)ft_strmatch
+				$(LIBFT_DIR)ft_strmatch \
+				$(LIBFT_DIR)ft_ftoa \
+				$(LIBFT_DIR)ft_ftoa_utils
 
 LIBFT_FILES = $(LIBFT_C:%=%.o)
 O_FILES	=	$(C_FILES:%.c=%.o)
