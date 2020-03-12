@@ -6,11 +6,13 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/06 17:51:25 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/03/09 18:45:17 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/03/12 14:10:50 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <float.h>
+#include <stdio.h>//
 
 char	*convert_float(t_printf_arg **arg)
 {
@@ -23,7 +25,8 @@ char	*convert_float(t_printf_arg **arg)
 	if (!final)
 		return (NULL);
 	(*arg)->arg_width = ft_strlen(final);
-	if ((*arg)->conv == f && (*arg)->arg.f < 0)
+	if ((*arg)->arg.f < 0 
+		|| (1 / (*arg)->arg.f < -FLT_MAX && (*arg)->arg.f == 0))
 	{
 		neg = (char *)ft_calloc((*arg)->arg_width + 1, sizeof(char));
 		if (!neg)
