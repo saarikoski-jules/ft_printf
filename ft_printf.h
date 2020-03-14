@@ -6,14 +6,13 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/14 13:02:19 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/03/12 18:13:10 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/03/14 12:06:33 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
-# include <unistd.h>//
-# include <stdarg.h>//
+# include <stdarg.h>
 # include "libft/libft.h"
 
 typedef union		u_type

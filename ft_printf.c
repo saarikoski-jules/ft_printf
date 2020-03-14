@@ -6,7 +6,7 @@
 /*   By: jsaariko <jsaariko@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/05 18:15:21 by jsaariko       #+#    #+#                */
-/*   Updated: 2020/03/06 14:55:50 by jsaariko      ########   odam.nl         */
+/*   Updated: 2020/03/14 11:41:20 by jsaariko      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	ft_printf(const char *str, ...)
 	va_list			ap;
 	int				ret;
 
+	if (str == NULL)
+		return (-1);
 	head = NULL;
 	va_start(ap, str);
 	if (gen_arg_list(&head, str, ap) == -1)

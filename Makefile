@@ -6,7 +6,7 @@
 #    By: jsaariko <jsaariko@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/12/03 20:38:39 by jsaariko       #+#    #+#                 #
-#    Updated: 2020/03/09 15:42:40 by jsaariko      ########   odam.nl          #
+#    Updated: 2020/03/14 12:27:58 by jsaariko      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,42 +93,24 @@ FLAGS	=	-Wall -Wextra -Werror
 
 all: $(NAME)
 
-#remember to compile with flags
-
-$(NAME): lib $(O_FILES)
+$(NAME): $(O_FILES)
 	@ar -rc $(NAME) $(LIBFT_FILES) $(O_FILES)
 	@ranlib $(NAME)
 	@echo "libftprintf.a compiled"
 
 $(O_FILES):
+	@make -C $(LIBFT_DIR) $(LIBFT_OBJECTS)
 	@gcc $(FLAGS) -c $(C_FILES)
 	@echo "Printf object files compiled"
-
-lib:
-	@make -C $(LIBFT_DIR) objects
-
-test: fclean $(NAME)
-	@gcc -o test testmain.c libftprintf.a
-	@echo "Created test executable"
 
 clean:
 	@rm -f $(O_FILES)
 	@make -C $(LIBFT_DIR) clean
 	@echo "Cleared printf object files"
 
-clean_test:
-	@rm -f test
-	@rm -f lindsay_tests
-	@echo "Cleared test executables on printf"
-
-fclean: clean clean_test
+fclean: clean
 	@make -C $(LIBFT_DIR) fclean
 	@rm -f $(NAME)
 	@echo "Printf all clean!"
 
-lindsay: $(NAME)
-	gcc -o lindsay_tests libftprintf.a ../limartin_tests/main.c
-
 re: fclean all
-
-	
